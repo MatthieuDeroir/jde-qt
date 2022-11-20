@@ -140,7 +140,7 @@ class Main(QtWidgets.QMainWindow):
 
     def display(self, state):
         # print("PROCESS", state)
-        subprocess.Popen("xset -d :0 dpms force " + state)
+        subprocess.Popen(["xset", "-d", ":0", "dpms", "force", state], stdout=subprocess.PIPE)
 
 
 

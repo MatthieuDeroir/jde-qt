@@ -9,6 +9,7 @@ from Splitscreen import Ui_Splitscreen
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QWidget,QPushButton,QApplication,QListWidget,QGridLayout,QLabel
 from PyQt5.QtCore import QTimer,QDateTime, Qt
+from data import *
 #
 # class WinForm(QWidget):
 #     def __init__(self,parent=None):
@@ -51,37 +52,46 @@ from PyQt5.QtCore import QTimer,QDateTime, Qt
     #     self.endBtn.setEnabled(False)
 
 class Main(QtWidgets.QMainWindow):
-    def __init__(self, option):
+    def __init__(self, mode):
         super(Main, self).__init__()
-        self.option = option
+        self.mode = mode
+        self.hasChangedDisplayMode = False
 
         # build ui
         self.getOption()
         self.ui.setupUi(self)
         self.timer = QTimer()
-        self.timer.timeout.connect(self.getOption)
         self.timer.start(1000)
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.move(0,0)
+        self.timer.timeout.connect(self.updateMode)
+        self.timer.timeout.connect(self.getOption)
+
 
 
     def getOption(self):
-        if option == 0:
+        if self.mode == 1:
             self.ui = Ui_MainWindow()
-        elif option == 1:
+            self.hasChangedDisplayMode = True
+        elif self.mode == 2:
             self.ui = Ui_Fullscreen()
-        elif option == 2:
+            self.hasChangedDisplayMode = True
+        elif self.mode == 3:
             self.ui = Ui_Splitscreen()
-    def showTime(self):
-        time = QDateTime.currentDateTime()
-        timeDisplay = time.toString('yyyy-MM-dd hh:mm:ss dddd')
+            self.hasChangedDisplayMode = True
+        if self.hasChangedDisplayMode:
+            self.ui.setupUi(self)
+            self.hasChangedDisplayMode = False
+    def updateMode(self):
+        self.mode = int(req("get", ip_mode).json()[0]['activeMode'])
+        print(self.mode)
 
 
 
 if __name__ == '__main__':
-    option = 0
+    mode = 1
     app = QtWidgets.QApplication(sys.argv)
-    main = Main(option)
+    main = Main(mode)
     main.show()
     sys.exit(app.exec_())
 

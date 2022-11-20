@@ -5,6 +5,7 @@ screen_height = 433
 
 ip = "http://localhost:4000/trucks"
 ip_fs = "http://localhost:4000/"
+ip_mode = "http://localhost:4000/modes"
 
 blink_time = 1
 

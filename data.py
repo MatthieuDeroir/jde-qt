@@ -9,7 +9,8 @@ ip_fs = "http://localhost:4000/"
 blink_time = 1
 
 ref_x = 3
-state_x = 95
+ref_width = 105
+state_x = 92
 dock_x = 180
 margin = 3
 font_size = 25
@@ -17,8 +18,8 @@ ref_list_x = 75
 state_max_size = 67
 separator = 46
 
-line_font_size = 10
-title_font_size = 8
+line_font_size = 12
+title_font_size = 10
 font = "Arial"
 
 try:

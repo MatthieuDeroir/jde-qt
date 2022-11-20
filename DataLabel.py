@@ -62,7 +62,7 @@ class DataLabel(QLabel):
 
 
     def blink(self):
-        if self.isHidden():
+        if self.isHidden() and self.data == 'COME':
             self.show()
-        else:
+        elif self.data == 'COME':
             self.hide()

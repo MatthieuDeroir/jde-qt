@@ -64,5 +64,7 @@ class DataLabel(QLabel):
     def blink(self):
         if self.isHidden() and self.data == 'COME':
             self.show()
+            self.setStyleSheet("color: #66FF22")
         elif self.data == 'COME':
-            self.hide()
+            self.setStyleSheet("color: green")
+            # self.hide()

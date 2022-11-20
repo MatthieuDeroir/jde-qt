@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtCore import QTimer, QDateTime
-from data import data, ip, blink_time
+from data import ip, blink_time
 from utils.req import req
 
 

@@ -55,13 +55,14 @@ class Main(QtWidgets.QMainWindow):
     def __init__(self, mode):
         super(Main, self).__init__()
         self.mode = mode
-        self.hasChangedDisplayMode = False
+        self.current_mode = 3
+        self.hasChangedDisplayMode = True
 
         # build ui
         self.getOption()
         self.ui.setupUi(self)
-        self.timer = QTimer()
-        self.timer.start(1000)
+        self.timer = QTimer(self)
+        self.timer.start(10000)
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.move(0,0)
         self.timer.timeout.connect(self.updateMode)
@@ -70,15 +71,15 @@ class Main(QtWidgets.QMainWindow):
 
 
     def getOption(self):
-        if self.mode == 3:
+        if self.current_mode is not self.mode:
+            self.hasChangedDisplayMode = True
+            self.current_mode = self.mode
+        if self.mode == 3 and self.hasChangedDisplayMode == True:
             self.ui = Ui_MainWindow()
-            self.hasChangedDisplayMode = True
-        elif self.mode == 1:
+        elif self.mode == 1 and self.hasChangedDisplayMode == True:
             self.ui = Ui_Fullscreen()
-            self.hasChangedDisplayMode = True
-        elif self.mode == 2:
+        elif self.mode == 2 and self.hasChangedDisplayMode == True:
             self.ui = Ui_Splitscreen()
-            self.hasChangedDisplayMode = True
         if self.hasChangedDisplayMode:
             self.ui.setupUi(self)
             self.hasChangedDisplayMode = False

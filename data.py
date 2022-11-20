@@ -23,58 +23,52 @@ line_font_size = 12
 title_font_size = 10
 font = "Arial"
 
-try:
-    data = [{"ref": "0123456789",
-              "state": "LOADING",
-              "dock": "13"
-              },
-            {"ref": "0123456789",
-              "state": "COME",
-              "dock": "13"
-              },
-            {"ref": "0123456789",
-              "state": "LOADING",
-              "dock": "13"
-              },
-            {"ref": "0123456789",
-              "state": "COME",
-              "dock": "13"
-              },
-            {"ref": "0123456789",
-              "state": "LOADING",
-              "dock": "13"
-              },
-            {"ref": "0123456789",
-              "state": "COME",
-              "dock": "13"
-              },
-            {"ref": "0123456789",
-              "state": "WAIT",
-              "dock": "13"
-              },
-            {"ref": "0123456789",
-              "state": "WAIT",
-              "dock": "13"
-              },
-            {"ref": "0123456789",
-              "state": "WAIT",
-              "dock": "13"
-              },
-            {"ref": "0123456789",
-              "state": "WAIT",
-              "dock": "13"
-              },
-            {"ref": "0123456789",
-              "state": "WAIT",
-              "dock": "13"
-              },
-            {"ref": "0123456789",
-              "state": "WAIT",
-              "dock": "13"
-              }
-            ]
-
-
-
-except:
-    print("no data")
+data = [{"ref": "0123456789",
+         "state": "LOADING",
+         "dock": "13"
+         },
+        {"ref": "0123456789",
+         "state": "COME",
+         "dock": "13"
+         },
+        {"ref": "0123456789",
+         "state": "LOADING",
+         "dock": "13"
+         },
+        {"ref": "0123456789",
+         "state": "COME",
+         "dock": "13"
+         },
+        {"ref": "0123456789",
+         "state": "LOADING",
+         "dock": "13"
+         },
+        {"ref": "0123456789",
+         "state": "COME",
+         "dock": "13"
+         },
+        {"ref": "0123456789",
+         "state": "WAIT",
+         "dock": "13"
+         },
+        {"ref": "0123456789",
+         "state": "WAIT",
+         "dock": "13"
+         },
+        {"ref": "0123456789",
+         "state": "WAIT",
+         "dock": "13"
+         },
+        {"ref": "0123456789",
+         "state": "WAIT",
+         "dock": "13"
+         },
+        {"ref": "0123456789",
+         "state": "WAIT",
+         "dock": "13"
+         },
+        {"ref": "0123456789",
+         "state": "WAIT",
+         "dock": "13"
+         }
+        ]

@@ -31,6 +31,7 @@ class DisplayLabel(QLabel):
 
     def updateData(self):
         self.setText(self.data)
+        self.show()
         # self.setStyleSheet("background-image: url(./"+ self.data +")")
         if self.category == 'state' and self.data == 'COME':
             self.timer.timeout.connect(self.blink)

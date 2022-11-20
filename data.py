@@ -15,7 +15,7 @@ dock_x = 180
 margin = 3
 font_size = 25
 ref_list_x = 75
-state_max_size = 67
+state_max_size = 80
 separator = 46
 
 line_font_size = 12

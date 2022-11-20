@@ -79,7 +79,7 @@ class Main(QtWidgets.QMainWindow):
 
 
 if __name__ == '__main__':
-    option = 2
+    option = 0
     app = QtWidgets.QApplication(sys.argv)
     main = Main(option)
     main.show()

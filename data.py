@@ -17,6 +17,10 @@ ref_list_x = 75
 state_max_size = 67
 separator = 46
 
+line_font_size = 10
+title_font_size = 8
+font = "Arial"
+
 try:
     data = [{"ref": "0123456789",
               "state": "LOADING",

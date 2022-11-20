@@ -107,26 +107,39 @@ class Main(QtWidgets.QMainWindow):
                 if self.stop[0] > self.current_hour:
                     print("### L'ECRAN EST ETEINT ###")
                     print("### HEURE ###")
+                    self.display("off")
+
                 elif self.stop[0] == self.current_hour and self.stop[1] >= self.current_minute:
                     print("### L'ECRAN EST ETEINT ###")
                     print("### MINUTE ###")
+                    self.display("off")
+
                 else:
                     print("### L'ECRAN EST ALLUME ###")
+                    self.display("on")
+
 
             elif self.start[0] == self.current_hour and self.start[1] <= self.current_minute:
                 if self.stop[0] > self.current_hour:
                     print("### L'ECRAN EST ETEINT ###")
                     print("### HEURE ###")
+                    self.display("off")
+
                 elif self.stop[0] == self.current_hour and self.stop[1] >= self.current_minute:
                     print("### L'ECRAN EST ETEINT ###")
                     print("### MINUTE ###")
+                    self.display("off")
                 else:
                     print("### L'ECRAN EST ALLUME ###")
+                    self.display("on")
 
 
         elif self.start[0] > self.stop[0]:
             print("start est superieur ou egal a stop")
             pass
+
+    def display(self, state):
+        subprocess.Popen("xset -d :0 dpms force " + state)
 
 
 

@@ -10,6 +10,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QWidget,QPushButton,QApplication,QListWidget,QGridLayout,QLabel
 from PyQt5.QtCore import QTimer,QDateTime, Qt
 from data import *
+from datetime import datetime
+import subprocess
 #
 # class WinForm(QWidget):
 #     def __init__(self,parent=None):
@@ -55,8 +57,12 @@ class Main(QtWidgets.QMainWindow):
     def __init__(self, mode):
         super(Main, self).__init__()
         self.mode = mode
+        self.start = ""
+        self.stop = ""
         self.current_mode = 3
         self.hasChangedDisplayMode = True
+
+
 
         # build ui
         self.getOption()
@@ -67,6 +73,7 @@ class Main(QtWidgets.QMainWindow):
         self.move(0,0)
         self.timer.timeout.connect(self.updateMode)
         self.timer.timeout.connect(self.getOption)
+        self.timer.timeout.connect(self.screenBlanking)
 
 
 
@@ -85,7 +92,41 @@ class Main(QtWidgets.QMainWindow):
             self.hasChangedDisplayMode = False
     def updateMode(self):
         self.mode = int(req("get", ip_mode).json()[0]['activeMode'])
-        print(self.mode)
+        self.start = req("get", ip_sb).json()[0]['start'].split(":")
+        self.stop = req("get", ip_sb).json()[0]['stop'].split(":")
+
+    def screenBlanking(self):
+        now = datetime.now()
+        self.current_hour = now.strftime("%H")
+        self.current_minute = now.strftime("%M")
+        print("Il est ", self.current_hour, ":", self.current_minute)
+        print("La veille est prévue entre ", self.start[0], ":", self.start[1], " et ", self.stop[0], ":", self.stop[1])
+        if self.start[0] <= self.stop[0]:
+            if self.start[0] < self.current_hour:
+                print("start est inferieur a stop")
+                if self.stop[0] > self.current_hour:
+                    print("### L'ECRAN EST ETEINT ###")
+                    print("### HEURE ###")
+                elif self.stop[0] == self.current_hour and self.stop[1] >= self.current_minute:
+                    print("### L'ECRAN EST ETEINT ###")
+                    print("### MINUTE ###")
+                else:
+                    print("### L'ECRAN EST ALLUME ###")
+
+            elif self.start[0] == self.current_hour and self.start[1] <= self.current_minute:
+                if self.stop[0] > self.current_hour:
+                    print("### L'ECRAN EST ETEINT ###")
+                    print("### HEURE ###")
+                elif self.stop[0] == self.current_hour and self.stop[1] >= self.current_minute:
+                    print("### L'ECRAN EST ETEINT ###")
+                    print("### MINUTE ###")
+                else:
+                    print("### L'ECRAN EST ALLUME ###")
+
+
+        elif self.start[0] > self.stop[0]:
+            print("start est superieur ou egal a stop")
+            pass
 
 
 

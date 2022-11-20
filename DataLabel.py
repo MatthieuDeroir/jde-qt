@@ -10,10 +10,11 @@ class DataLabel(QLabel):
         self.timer = QTimer()
         self.index = index
         self.category = category
-        self.timer.start(1000)
+        self.timer.start(500)
         self.data = ""
         self.previous_state = "LOADING"
         self.time = 0
+        self.flag = 0
         self.timer.timeout.connect(self.updateData)
         self.timer.timeout.connect(self.fetchData)
 
@@ -25,11 +26,12 @@ class DataLabel(QLabel):
             elif self.category == 'dock':
                 self.data = str(fetched_datas[self.index]['dockIndex'])
             elif self.category == 'state':
-                if fetched_datas[self.index]['state'] is False:
+                if fetched_datas[self.index]['state'] is False and fetched_datas[self.index]['flag'] is False:
                     self.data = 'WAIT'
-                elif fetched_datas[self.index]['state'] is True and fetched_datas[self.index]['flag'] is True:
+                elif fetched_datas[self.index]['state'] is False and fetched_datas[self.index]['flag'] is True:
                     self.data = 'COME'
                 else:
+                    self.show()
                     self.data = 'LOADING'
 
 
@@ -54,7 +56,7 @@ class DataLabel(QLabel):
         self.setText(self.data)
         if self.category == 'state' and self.data == 'COME':
             self.timer.timeout.connect(self.blink)
-            self.setStyleSheet("color: #66FF22")
+            # self.setStyleSheet("color: #66FF22")
         elif self.category == 'state' and self.data == 'LOADING':
             self.show()
             self.setStyleSheet("color: blue")
@@ -63,7 +65,12 @@ class DataLabel(QLabel):
 
 
     def blink(self):
-        if self.isHidden():
-            self.show()
+        # if self.isHidden():
+        #     self.show()
+        if self.flag == 1:
+            self.setStyleSheet("color: #66FF22")
+            self.flag = 0
         else:
-            self.hide()
+            # self.hide()
+            self.setStyleSheet("color: #006400")
+            self.flag = 1

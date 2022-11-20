@@ -26,21 +26,21 @@ class Ui_Splitscreen(object):
 
         self.line = 0
 
-        self.display_label_1 = DisplayLabel(self.centralwidget, 0, 0)
+        self.display_label_1 = DisplayLabel(self.centralwidget, 1)
         self.display_label_1.setObjectName("display_label_1")
         self.display_label_1.setStyleSheet("background-image: url(./fullscreen.png)")
         self.display_label_1.setGeometry(QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))
 
         self.line = 1
 
-        self.display_label_2 = DisplayLabel(self.centralwidget, 0, 0)
+        self.display_label_2 = DisplayLabel(self.centralwidget, 2)
         self.display_label_2.setObjectName("display_label_2")
         self.display_label_2.setStyleSheet("background-image: url(./fullscreen.png)")
         self.display_label_2.setGeometry(QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))
 
         self.line = 2
 
-        self.display_label_3 = DisplayLabel(self.centralwidget, 0, 0)
+        self.display_label_3 = DisplayLabel(self.centralwidget, 3)
         self.display_label_3.setObjectName("display_label_3")
         self.display_label_3.setStyleSheet("background-image: url(./fullscreen.png)")
         self.display_label_3.setGeometry(QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))

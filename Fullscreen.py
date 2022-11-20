@@ -24,10 +24,10 @@ class Ui_Fullscreen(object):
         self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
 
-        self.logo_label = DisplayLabel(self.centralwidget, 0, 0)
-        self.logo_label.setObjectName("logo_label")
-        self.logo_label.setStyleSheet("background-image: url(./fullscreen.png)")
-        self.logo_label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
+        self.display_label = DisplayLabel(self.centralwidget, 0)
+        self.display_label.setObjectName("display_label")
+        self.display_label.setStyleSheet("background-image: url(./fullscreen.png)")
+        self.display_label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

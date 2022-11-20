@@ -83,9 +83,9 @@ class Main(QtWidgets.QMainWindow):
             self.current_mode = self.mode
         if self.mode == 3 and self.hasChangedDisplayMode == True:
             self.ui = Ui_MainWindow()
-        elif self.mode == 1 and self.hasChangedDisplayMode == True:
-            self.ui = Ui_Fullscreen()
         elif self.mode == 2 and self.hasChangedDisplayMode == True:
+            self.ui = Ui_Fullscreen()
+        elif self.mode == 1 and self.hasChangedDisplayMode == True:
             self.ui = Ui_Splitscreen()
         if self.hasChangedDisplayMode:
             self.ui.setupUi(self)
@@ -139,6 +139,7 @@ class Main(QtWidgets.QMainWindow):
             pass
 
     def display(self, state):
+        # print("PROCESS", state)
         subprocess.Popen("xset -d :0 dpms force " + state)
 
 

@@ -29,6 +29,8 @@ class Ui_MainWindow(QMainWindow):
         MainWindow.setStyleSheet("background-color: black;")
         MainWindow.setDocumentMode(False)
 
+        QtGui.QFontDatabase.addApplicationFont("Arial.otf")
+
         # self.timer = QTimer()
         # self.timer.timeout.connect(self.updateLabels)
         #

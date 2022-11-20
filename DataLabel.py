@@ -56,13 +56,14 @@ class DataLabel(QLabel):
             self.timer.timeout.connect(self.blink)
             self.setStyleSheet("color: #66FF22")
         elif self.category == 'state' and self.data == 'LOADING':
+            self.show()
             self.setStyleSheet("color: blue")
         elif self.category == 'state' and self.data == 'WAIT':
             self.setStyleSheet("color: orange")
 
 
     def blink(self):
-        if self.isHidden() and self.data == 'COME':
+        if self.isHidden():
             self.show()
-        elif self.data == 'COME':
+        else:
             self.hide()

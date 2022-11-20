@@ -70,13 +70,13 @@ class Main(QtWidgets.QMainWindow):
 
 
     def getOption(self):
-        if self.mode == 1:
+        if self.mode == 3:
             self.ui = Ui_MainWindow()
             self.hasChangedDisplayMode = True
-        elif self.mode == 2:
+        elif self.mode == 1:
             self.ui = Ui_Fullscreen()
             self.hasChangedDisplayMode = True
-        elif self.mode == 3:
+        elif self.mode == 2:
             self.ui = Ui_Splitscreen()
             self.hasChangedDisplayMode = True
         if self.hasChangedDisplayMode:
@@ -89,7 +89,7 @@ class Main(QtWidgets.QMainWindow):
 
 
 if __name__ == '__main__':
-    mode = 1
+    mode = 3
     app = QtWidgets.QApplication(sys.argv)
     main = Main(mode)
     main.show()

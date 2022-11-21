@@ -30,8 +30,8 @@ class DataLabel(QLabel):
                 elif fetched_datas[self.index]['state'] is False and fetched_datas[self.index]['flag'] is True:
                     self.data = 'COME'
                 elif fetched_datas[self.index]['state'] is True and fetched_datas[self.index]['flag'] is True:
-                    self.show()
                     self.setStyleSheet("color: blue")
+                    self.show()
                     self.data = 'LOADING'
                 else:
                     self.data = ''
@@ -39,22 +39,14 @@ class DataLabel(QLabel):
 
             if (self.category is 'state' or self.category is 'dock') and fetched_datas[self.index]['plate'] == '':
                 self.data = ''
-            # if self.category is 'state' and self.data is 'COME' and self.time > blink_time:
-            #     self.data = "LOADING"
-            #     req("put", ip + "/" + fetched_datas[self.index]["_id"], {
-            #         "flag": False
-            #     })
-            #     print(req("get", ip).json()[self.index]['flag'])
-            #     self.time = 0
-            # elif self.category is 'state' and self.data == 'COME' and self.time <= blink_time:
-            #     self.time = self.time + 1
+
             self.setText(self.data)
             if self.category == 'state' and self.data == 'COME':
                 self.timer.timeout.connect(self.blink)
                 # self.setStyleSheet("color: #66FF22")
             elif self.category == 'state' and self.data == 'LOADING':
-                self.show()
                 self.setStyleSheet("color: blue")
+                self.show()
             elif self.category == 'state' and self.data == 'WAIT':
                 self.setStyleSheet("color: orange")
 
@@ -69,10 +61,10 @@ class DataLabel(QLabel):
     def blink(self):
         # if self.isHidden():
         #     self.show()
-        if self.flag == 1:
+        if self.flag == 1 and self.data is 'COME':
             self.setStyleSheet("color: #66FF22")
             self.flag = 0
-        else:
+        elif self.flag == 0 and self.data is 'COME':
             # self.hide()
             self.setStyleSheet("color: #006400")
             self.flag = 1

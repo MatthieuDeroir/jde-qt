@@ -11,7 +11,7 @@ ip_fs = "http://"+ ipv4 + port + "/files"
 ip_mode = "http://"+ ipv4 + port + "/modes"
 ip_sb = "http://"+ ipv4 + port + "/veille"
 
-path_to_media = "../../Project-Couchet/public"
+path_to_media = "../../server/frontend/public"
 
 blink_time = 1
 
@@ -19,7 +19,7 @@ ref_x = 3
 ref_width = 105
 state_x = 92
 dock_x = 180
-dock_title_x = 1 + (1/4) + 3
+dock_title_x = 1 + (1/2)
 margin = 3
 font_size = 25
 ref_list_x = 75

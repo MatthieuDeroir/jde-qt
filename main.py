@@ -108,43 +108,46 @@ class Main(QtWidgets.QMainWindow):
         self.current_hour = now.strftime("%H")
         self.current_minute = now.strftime("%M")
         print("Il est ", self.current_hour, ":", self.current_minute)
-        print("La veille est prévue entre ", self.start[0], ":", self.start[1], " et ", self.stop[0], ":", self.stop[1])
-        if self.start[0] <= self.stop[0]:
-            if self.start[0] < self.current_hour:
-                print("start est inferieur a stop")
-                if self.stop[0] > self.current_hour:
-                    print("### L'ECRAN EST ETEINT ###")
-                    print("### HEURE ###")
-                    self.display("off")
+        try:
+            print("La veille est prévue entre ", self.start[0], ":", self.start[1], " et ", self.stop[0], ":", self.stop[1])
+            if self.start[0] <= self.stop[0]:
+                if self.start[0] < self.current_hour:
+                    print("start est inferieur a stop")
+                    if self.stop[0] > self.current_hour:
+                        print("### L'ECRAN EST ETEINT ###")
+                        print("### HEURE ###")
+                        self.display("off")
 
-                elif self.stop[0] == self.current_hour and self.stop[1] >= self.current_minute:
-                    print("### L'ECRAN EST ETEINT ###")
-                    print("### MINUTE ###")
-                    self.display("off")
+                    elif self.stop[0] == self.current_hour and self.stop[1] >= self.current_minute:
+                        print("### L'ECRAN EST ETEINT ###")
+                        print("### MINUTE ###")
+                        self.display("off")
 
-                else:
-                    print("### L'ECRAN EST ALLUME ###")
-                    self.display("on")
-
-
-            elif self.start[0] == self.current_hour and self.start[1] <= self.current_minute:
-                if self.stop[0] > self.current_hour:
-                    print("### L'ECRAN EST ETEINT ###")
-                    print("### HEURE ###")
-                    self.display("off")
-
-                elif self.stop[0] == self.current_hour and self.stop[1] >= self.current_minute:
-                    print("### L'ECRAN EST ETEINT ###")
-                    print("### MINUTE ###")
-                    self.display("off")
-                else:
-                    print("### L'ECRAN EST ALLUME ###")
-                    self.display("on")
+                    else:
+                        print("### L'ECRAN EST ALLUME ###")
+                        self.display("on")
 
 
-        elif self.start[0] > self.stop[0]:
-            print("start est superieur ou egal a stop")
-            pass
+                elif self.start[0] == self.current_hour and self.start[1] <= self.current_minute:
+                    if self.stop[0] > self.current_hour:
+                        print("### L'ECRAN EST ETEINT ###")
+                        print("### HEURE ###")
+                        self.display("off")
+
+                    elif self.stop[0] == self.current_hour and self.stop[1] >= self.current_minute:
+                        print("### L'ECRAN EST ETEINT ###")
+                        print("### MINUTE ###")
+                        self.display("off")
+                    else:
+                        print("### L'ECRAN EST ALLUME ###")
+                        self.display("on")
+
+
+            elif self.start[0] > self.stop[0]:
+                print("start est superieur ou egal a stop")
+                pass
+        except:
+            print('start and stop not init')
 
     def display(self, state):
         # print("PROCESS", state)

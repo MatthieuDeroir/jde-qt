@@ -62,7 +62,7 @@ class Ui_Truckscreen(QMainWindow):
         self.title_1_state.setObjectName("title_1_state")
         self.title_1_dock = QtWidgets.QLabel(self.centralwidget)
         self.title_1_dock.setText("DOCK")
-        self.title_1_dock.setGeometry(QtCore.QRect(screen_width - self.getWidth(self.title_1_dock)*2 - margin, 50, 41, font_size))
+        self.title_1_dock.setGeometry(QtCore.QRect(screen_width - self.getWidth(self.title_1_dock)*dock_title_x - margin, 50, 41, font_size))
         self.title_1_dock.setStyleSheet("color: white;")
         self.title_1_dock.setFont(QtGui.QFont(font, title_font_size))
         self.title_1_dock.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
@@ -299,7 +299,7 @@ class Ui_Truckscreen(QMainWindow):
         self.title_2_dock = QtWidgets.QLabel(self.centralwidget)
         self.title_2_dock.setText("DOCK")
 
-        self.title_2_dock.setGeometry(QtCore.QRect(screen_width - self.getWidth(self.title_2_dock) - margin, 246, 41, font_size))
+        self.title_2_dock.setGeometry(QtCore.QRect(screen_width - self.getWidth(self.title_2_dock) * dock_title_x - margin, 246, 41, font_size))
         self.title_2_dock.setStyleSheet("color: white;")
         self.title_2_dock.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.title_2_dock.setObjectName("title_2_dock")

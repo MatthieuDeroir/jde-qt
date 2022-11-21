@@ -21,7 +21,7 @@ class Ui_Logo(QtGui.QPixmap):
         super(Ui_Logo, self).__init__()
 
 
-class Ui_MainWindow(QMainWindow):
+class Ui_Truckscreen(QMainWindow):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
@@ -62,7 +62,7 @@ class Ui_MainWindow(QMainWindow):
         self.title_1_state.setObjectName("title_1_state")
         self.title_1_dock = QtWidgets.QLabel(self.centralwidget)
         self.title_1_dock.setText("DOCK")
-        self.title_1_dock.setGeometry(QtCore.QRect(screen_width - self.getWidth(self.title_1_dock) - margin, 50, 41, font_size))
+        self.title_1_dock.setGeometry(QtCore.QRect(screen_width - self.getWidth(self.title_1_dock)*2 - margin, 50, 41, font_size))
         self.title_1_dock.setStyleSheet("color: white;")
         self.title_1_dock.setFont(QtGui.QFont(font, title_font_size))
         self.title_1_dock.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)

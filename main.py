@@ -2,9 +2,10 @@ import sys
 # import PyQt5
 # from PyQt5 import QtCore, QtGui
 # from PyQt5.QtWidgets import QWidget,QPushButton,QApplication,QListWidget,QGridLayout,QLabel, QWidgets
-from Trucks import Ui_MainWindow
+from Trucks import Ui_Truckscreen
 from Fullscreen import Ui_Fullscreen
 from Splitscreen import Ui_Splitscreen
+from Multiscreen import Ui_Multiscreen
 # from PyQt5.QtCore import QTimer,QDateTime
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QWidget,QPushButton,QApplication,QListWidget,QGridLayout,QLabel
@@ -68,7 +69,7 @@ class Main(QtWidgets.QMainWindow):
         self.getOption()
         self.ui.setupUi(self)
         self.timer = QTimer(self)
-        self.timer.start(10000)
+        self.timer.start(1200)
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.move(0,0)
         self.timer.timeout.connect(self.updateMode)
@@ -82,7 +83,7 @@ class Main(QtWidgets.QMainWindow):
             self.hasChangedDisplayMode = True
             self.current_mode = self.mode
         if self.mode == 3 and self.hasChangedDisplayMode == True:
-            self.ui = Ui_MainWindow()
+            self.ui = Ui_Truckscreen()
         elif self.mode == 2 and self.hasChangedDisplayMode == True:
             self.ui = Ui_Fullscreen()
         elif self.mode == 1 and self.hasChangedDisplayMode == True:

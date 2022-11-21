@@ -11,9 +11,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from data import screen_width, screen_height
 from DisplayLabel import DisplayLabel
+from Trucks import Ui_Truckscreen
 
 
-class Ui_Splitscreen(object):
+class Ui_Multiscreen(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(192, 433)
@@ -24,23 +25,9 @@ class Ui_Splitscreen(object):
         self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
 
-        self.line = 0
-
-        self.display_label_1 = DisplayLabel(self.centralwidget, 1)
-        self.display_label_1.setObjectName("display_label_1")
-        self.display_label_1.setGeometry(QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))
-
-        self.line = 1
-
-        self.display_label_2 = DisplayLabel(self.centralwidget, 2)
-        self.display_label_2.setObjectName("display_label_2")
-        self.display_label_2.setGeometry(QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))
-
-        self.line = 2
-
-        self.display_label_3 = DisplayLabel(self.centralwidget, 3)
-        self.display_label_3.setObjectName("display_label_3")
-        self.display_label_3.setGeometry(QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))
+        self.display_label = DisplayLabel(self.centralwidget, 0)
+        self.display_label.setObjectName("display_label")
+        self.display_label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

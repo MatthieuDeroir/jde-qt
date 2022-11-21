@@ -92,9 +92,12 @@ class Main(QtWidgets.QMainWindow):
             self.ui.setupUi(self)
             self.hasChangedDisplayMode = False
     def updateMode(self):
-        self.mode = int(req("get", ip_mode).json()[0]['activeMode'])
-        self.start = req("get", ip_sb).json()[0]['start'].split(":")
-        self.stop = req("get", ip_sb).json()[0]['stop'].split(":")
+        try:
+            self.mode = int(req("get", ip_mode).json()[0]['activeMode'])
+            self.start = req("get", ip_sb).json()[0]['start'].split(":")
+            self.stop = req("get", ip_sb).json()[0]['stop'].split(":")
+        except:
+            print("cant fetch datas")
 
     def screenBlanking(self):
         now = datetime.now()

@@ -61,11 +61,10 @@ class Main(QtWidgets.QMainWindow):
         self.current_mode = 3
         self.hasChangedDisplayMode = True
 
-        self.start[0] = ""
-        self.start[1] = ""
+        self.start = ["", ""]
 
-        self.stop[0] = ""
-        self.stop[1] = ""
+        self.stop = ["", ""]
+
 
         # build ui
         self.getOption()

@@ -3,10 +3,13 @@ from utils.req import req
 screen_width = 192
 screen_height = 433
 
-ip = "http://localhost:4000/trucks"
-ip_fs = "http://localhost:4000/files"
-ip_mode = "http://localhost:4000/modes"
-ip_sb = "http://localhost:4000/veille"
+ipv4 = "192.168.1.42"
+port = ":4000"
+
+ip = "http://"+ ipv4 + port + "/trucks"
+ip_fs = "http://"+ ipv4 + port + "/files"
+ip_mode = "http://"+ ipv4 + port + "/modes"
+ip_sb = "http://"+ ipv4 + port + "/veille"
 
 path_to_media = "../../Project-Couchet/public"
 

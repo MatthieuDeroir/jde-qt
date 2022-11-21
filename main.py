@@ -58,8 +58,6 @@ class Main(QtWidgets.QMainWindow):
     def __init__(self, mode):
         super(Main, self).__init__()
         self.mode = mode
-        self.start = ""
-        self.stop = ""
         self.current_mode = 3
         self.hasChangedDisplayMode = True
 

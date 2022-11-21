@@ -15,7 +15,6 @@ class DataLabel(QLabel):
         self.previous_state = "LOADING"
         self.time = 0
         self.flag = 0
-        self.timer.timeout.connect(self.updateData)
         self.timer.timeout.connect(self.fetchData)
 
     def fetchData(self):
@@ -30,9 +29,12 @@ class DataLabel(QLabel):
                     self.data = 'WAIT'
                 elif fetched_datas[self.index]['state'] is False and fetched_datas[self.index]['flag'] is True:
                     self.data = 'COME'
-                else:
+                elif fetched_datas[self.index]['state'] is True and fetched_datas[self.index]['flag'] is True:
                     self.show()
+                    self.setStyleSheet("color: blue")
                     self.data = 'LOADING'
+                else:
+                    self.data = ''
 
 
             if (self.category is 'state' or self.category is 'dock') and fetched_datas[self.index]['plate'] == '':
@@ -46,22 +48,22 @@ class DataLabel(QLabel):
             #     self.time = 0
             # elif self.category is 'state' and self.data == 'COME' and self.time <= blink_time:
             #     self.time = self.time + 1
+            self.setText(self.data)
+            if self.category == 'state' and self.data == 'COME':
+                self.timer.timeout.connect(self.blink)
+                # self.setStyleSheet("color: #66FF22")
+            elif self.category == 'state' and self.data == 'LOADING':
+                self.show()
+                self.setStyleSheet("color: blue")
+            elif self.category == 'state' and self.data == 'WAIT':
+                self.setStyleSheet("color: orange")
 
         except:
             print("cant fetch datas")
 
 # self.data[self.index][self.category] = fetched_datas[self.index]
 
-    def updateData(self):
-        self.setText(self.data)
-        if self.category == 'state' and self.data == 'COME':
-            self.timer.timeout.connect(self.blink)
-            # self.setStyleSheet("color: #66FF22")
-        elif self.category == 'state' and self.data == 'LOADING':
-            self.show()
-            self.setStyleSheet("color: blue")
-        elif self.category == 'state' and self.data == 'WAIT':
-            self.setStyleSheet("color: orange")
+
 
 
     def blink(self):

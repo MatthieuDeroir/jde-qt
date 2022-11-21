@@ -3,7 +3,7 @@ from utils.req import req
 screen_width = 192
 screen_height = 433
 
-ipv4 = "192.168.1.42"
+ipv4 = "localhost"
 port = ":4000"
 
 ip = "http://"+ ipv4 + port + "/trucks"

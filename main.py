@@ -65,7 +65,6 @@ class Main(QtWidgets.QMainWindow):
 
         self.stop = ["", ""]
 
-
         # build ui
         self.getOption()
         self.ui.setupUi(self)

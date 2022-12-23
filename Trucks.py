@@ -16,19 +16,19 @@ from BlinkingLabel import BlinkingLabel
 from DataLabel import DataLabel
 
 
-class Ui_Logo(QtGui.QPixmap):
-    def __init__(self):
-        super(Ui_Logo, self).__init__()
-
-
 class Ui_Truckscreen(QMainWindow):
+    def fetchData(self):
+        self.pathFullScreen = req("get", ip_fs).json()
     def setupUi(self, MainWindow):
+        self.media = req("get", ip_fs).json()
+        
+        self.timer = QTimer()
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
         MainWindow.resize(screen_width, screen_height)
         MainWindow.setStyleSheet("background-color: black;")
         MainWindow.setDocumentMode(False)
-
+        
         QtGui.QFontDatabase.addApplicationFont("Arial.otf")
 
         # self.timer = QTimer()
@@ -62,7 +62,7 @@ class Ui_Truckscreen(QMainWindow):
         self.title_1_state.setObjectName("title_1_state")
         self.title_1_dock = QtWidgets.QLabel(self.centralwidget)
         self.title_1_dock.setText("DOCK")
-        self.title_1_dock.setGeometry(QtCore.QRect(screen_width - self.getWidth(self.title_1_dock)*dock_title_x - margin, 50, 41, font_size))
+        self.title_1_dock.setGeometry(QtCore.QRect(screen_width - self.getWidth(self.title_1_dock)*dock_title_x - 6, 50, 41, font_size))
         self.title_1_dock.setStyleSheet("color: white;")
         self.title_1_dock.setFont(QtGui.QFont(font, title_font_size))
         self.title_1_dock.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
@@ -81,7 +81,7 @@ class Ui_Truckscreen(QMainWindow):
         self.ref_1.setFont(QtGui.QFont(font, line_font_size))
         self.ref_1.setStyleSheet("color:yellow;")
         self.ref_1.setText(data[self.line]['ref'])
-        self.ref_1.setGeometry(QtCore.QRect(ref_x, ref_list_x + (font_size * self.line), self.getWidth(self.ref_1), font_size))
+        self.ref_1.setGeometry(QtCore.QRect(ref_x, ref_list_x + (font_size * self.line), self.getWidth(self.ref_1)+8, font_size))
 
         self.state_1 = DataLabel(self.centralwidget, self.line, "state")
         self.state_1.setFont(QtGui.QFont(font, line_font_size))
@@ -98,7 +98,7 @@ class Ui_Truckscreen(QMainWindow):
         self.dock_1.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter )
         self.dock_1.setText(data[self.line]['dock'])
         self.dock_1.setGeometry(QtCore.QRect(screen_width - self.getWidth(self.dock_1) - margin, ref_list_x + (font_size * self.line),
-                                             self.getWidth(self.dock_1), font_size))
+                                             self.getWidth(self.dock_1)+ margin, font_size))
 
         # endregion
 
@@ -109,7 +109,7 @@ class Ui_Truckscreen(QMainWindow):
         self.ref_2.setFont(QtGui.QFont(font, line_font_size))
         self.ref_2.setStyleSheet("color:yellow;")
         self.ref_2.setText(data[self.line]['ref'])
-        self.ref_2.setGeometry(QtCore.QRect(ref_x, ref_list_x + (font_size * self.line), self.getWidth(self.ref_2), font_size))
+        self.ref_2.setGeometry(QtCore.QRect(ref_x, ref_list_x + (font_size * self.line), self.getWidth(self.ref_2)+8, font_size))
 
         self.state_2 = DataLabel(self.centralwidget, self.line, "state")
         self.state_2.setFont(QtGui.QFont(font, line_font_size))
@@ -130,7 +130,7 @@ class Ui_Truckscreen(QMainWindow):
         self.dock_2.setText(data[self.line]['dock'])
         self.dock_2.setGeometry(
             QtCore.QRect(screen_width - self.getWidth(self.dock_2) - margin, ref_list_x + (font_size * self.line),
-                         self.getWidth(self.dock_2), font_size))
+                         self.getWidth(self.dock_2)+ margin, font_size))
 
         # endregion
 
@@ -144,7 +144,7 @@ class Ui_Truckscreen(QMainWindow):
         self.ref_3.setFont(QtGui.QFont(font, line_font_size))
 
         self.ref_3.setText(data[self.line]['ref'])
-        self.ref_3.setGeometry(QtCore.QRect(ref_x, ref_list_x + (font_size * self.line), self.getWidth(self.ref_3), font_size))
+        self.ref_3.setGeometry(QtCore.QRect(ref_x, ref_list_x + (font_size * self.line), self.getWidth(self.ref_3)+8, font_size))
 
         self.state_3 = DataLabel(self.centralwidget, self.line, "state")
         self.state_3.setFont(QtGui.QFont(font, line_font_size))
@@ -165,7 +165,7 @@ class Ui_Truckscreen(QMainWindow):
         self.dock_3.setText(data[self.line]['dock'])
         self.dock_3.setGeometry(
             QtCore.QRect(screen_width - self.getWidth(self.dock_3) - margin, ref_list_x + (font_size * self.line),
-                         self.getWidth(self.dock_3), font_size))
+                         self.getWidth(self.dock_3)+ margin, font_size))
 
         # endregion
 
@@ -179,7 +179,7 @@ class Ui_Truckscreen(QMainWindow):
 
         self.ref_4.setStyleSheet("color:yellow;")
         self.ref_4.setText(data[self.line]['ref'])
-        self.ref_4.setGeometry(QtCore.QRect(ref_x, ref_list_x + (font_size * self.line), self.getWidth(self.ref_4), font_size))
+        self.ref_4.setGeometry(QtCore.QRect(ref_x, ref_list_x + (font_size * self.line), self.getWidth(self.ref_4)+8, font_size))
 
         self.state_4 = DataLabel(self.centralwidget, self.line, "state")
         self.state_4.setFont(QtGui.QFont(font, line_font_size))
@@ -200,7 +200,7 @@ class Ui_Truckscreen(QMainWindow):
         self.dock_4.setText(data[self.line]['dock'])
         self.dock_4.setGeometry(
             QtCore.QRect(screen_width - self.getWidth(self.dock_4) - margin, ref_list_x + (font_size * self.line),
-                         self.getWidth(self.dock_4), font_size))
+                         self.getWidth(self.dock_4)+ margin, font_size))
 
         # endregion
 
@@ -213,7 +213,7 @@ class Ui_Truckscreen(QMainWindow):
         self.ref_5.setFont(QtGui.QFont(font, line_font_size))
         self.ref_5.setStyleSheet("color:yellow;")
         self.ref_5.setText(data[self.line]['ref'])
-        self.ref_5.setGeometry(QtCore.QRect(ref_x, ref_list_x + (font_size * self.line), self.getWidth(self.ref_5), font_size))
+        self.ref_5.setGeometry(QtCore.QRect(ref_x, ref_list_x + (font_size * self.line), self.getWidth(self.ref_5)+8, font_size))
 
         self.state_5 = DataLabel(self.centralwidget, self.line, "state")
         self.state_5.setFont(QtGui.QFont(font, line_font_size))
@@ -234,7 +234,7 @@ class Ui_Truckscreen(QMainWindow):
         self.dock_5.setText(data[self.line]['dock'])
         self.dock_5.setGeometry(
             QtCore.QRect(screen_width - self.getWidth(self.dock_5) - margin, ref_list_x + (font_size * self.line),
-                         self.getWidth(self.dock_5), font_size))
+                         self.getWidth(self.dock_5)+ margin, font_size))
 
         # endregion
 
@@ -247,7 +247,7 @@ class Ui_Truckscreen(QMainWindow):
         self.ref_6.setFont(QtGui.QFont(font, line_font_size))
         self.ref_6.setStyleSheet("color:yellow;")
         self.ref_6.setText(data[self.line]['ref'])
-        self.ref_6.setGeometry(QtCore.QRect(ref_x, ref_list_x + (font_size * self.line), self.getWidth(self.ref_6), font_size))
+        self.ref_6.setGeometry(QtCore.QRect(ref_x, ref_list_x + (font_size * self.line), self.getWidth(self.ref_6)+8, font_size))
 
         self.state_6 = DataLabel(self.centralwidget, self.line, "state")
         self.state_6.setFont(QtGui.QFont(font, line_font_size))
@@ -268,7 +268,7 @@ class Ui_Truckscreen(QMainWindow):
         self.dock_6.setText(data[self.line]['dock'])
         self.dock_6.setGeometry(
             QtCore.QRect(screen_width - self.getWidth(self.dock_6) - margin, ref_list_x + (font_size * self.line),
-                         self.getWidth(self.dock_6), font_size))
+                         self.getWidth(self.dock_6)+ margin, font_size))
 
         # endregion
         # endregion
@@ -320,7 +320,7 @@ class Ui_Truckscreen(QMainWindow):
         self.ref_7.setStyleSheet("color:yellow;")
         self.ref_7.setText(data[self.line]['ref'])
         self.ref_7.setGeometry(
-            QtCore.QRect(ref_x, ref_list_x + (font_size * self.line) + separator, self.getWidth(self.ref_7), font_size))
+            QtCore.QRect(ref_x, ref_list_x + (font_size * self.line) + separator, self.getWidth(self.ref_7)+8, font_size))
 
         self.state_7 = DataLabel(self.centralwidget, self.line, "state")
         self.state_7.setFont(QtGui.QFont(font, line_font_size))
@@ -336,7 +336,7 @@ class Ui_Truckscreen(QMainWindow):
         self.dock_7.setText(data[self.line]['dock'])
         self.dock_7.setGeometry(
             QtCore.QRect(screen_width - self.getWidth(self.dock_7) - margin, ref_list_x + (font_size * self.line) + separator,
-                         self.getWidth(self.dock_7), font_size))
+                         self.getWidth(self.dock_7)+ margin, font_size))
 
         # endregion
 
@@ -348,7 +348,7 @@ class Ui_Truckscreen(QMainWindow):
         self.ref_8.setStyleSheet("color:yellow;")
         self.ref_8.setText(data[self.line]['ref'])
         self.ref_8.setGeometry(
-            QtCore.QRect(ref_x, ref_list_x + (font_size * self.line) + separator, self.getWidth(self.ref_8), font_size))
+            QtCore.QRect(ref_x, ref_list_x + (font_size * self.line) + separator, self.getWidth(self.ref_8)+8, font_size))
 
         self.state_8 = DataLabel(self.centralwidget, self.line, "state")
         self.state_8.setFont(QtGui.QFont(font, line_font_size))
@@ -367,7 +367,7 @@ class Ui_Truckscreen(QMainWindow):
         self.dock_8.setText(data[self.line]['dock'])
         self.dock_8.setGeometry(
             QtCore.QRect(screen_width - self.getWidth(self.dock_8) - margin, ref_list_x + (font_size * self.line) + separator,
-                         self.getWidth(self.dock_8), font_size))
+                         self.getWidth(self.dock_8)+ margin, font_size))
 
         # endregion
 
@@ -382,7 +382,7 @@ class Ui_Truckscreen(QMainWindow):
 
         self.ref_9.setText(data[self.line]['ref'])
         self.ref_9.setGeometry(
-            QtCore.QRect(ref_x, ref_list_x + (font_size * self.line) + separator, self.getWidth(self.ref_9), font_size))
+            QtCore.QRect(ref_x, ref_list_x + (font_size * self.line) + separator, self.getWidth(self.ref_9)+8, font_size))
 
         self.state_9 = DataLabel(self.centralwidget, self.line, "state")
         self.state_9.setFont(QtGui.QFont(font, line_font_size))
@@ -401,7 +401,7 @@ class Ui_Truckscreen(QMainWindow):
         self.dock_9.setText(data[self.line]['dock'])
         self.dock_9.setGeometry(
             QtCore.QRect(screen_width - self.getWidth(self.dock_9) - margin, ref_list_x + (font_size * self.line) + separator,
-                         self.getWidth(self.dock_9), font_size))
+                         self.getWidth(self.dock_9)+ margin, font_size))
 
         # endregion
 
@@ -416,7 +416,7 @@ class Ui_Truckscreen(QMainWindow):
 
         self.ref_10.setText(data[self.line]['ref'])
         self.ref_10.setGeometry(
-            QtCore.QRect(ref_x, ref_list_x + (font_size * self.line) + separator, self.getWidth(self.ref_10), font_size))
+            QtCore.QRect(ref_x, ref_list_x + (font_size * self.line) + separator, self.getWidth(self.ref_10)+8, font_size))
 
         self.state_10 = DataLabel(self.centralwidget, self.line, "state")
         self.state_10.setFont(QtGui.QFont(font, line_font_size))
@@ -436,7 +436,7 @@ class Ui_Truckscreen(QMainWindow):
         self.dock_10.setText(data[self.line]['dock'])
         self.dock_10.setGeometry(
             QtCore.QRect(screen_width - self.getWidth(self.dock_10) - margin, ref_list_x + (font_size * self.line) + separator,
-                         self.getWidth(self.dock_10), font_size))
+                         self.getWidth(self.dock_10)+ margin, font_size))
 
         # endregion
 
@@ -451,7 +451,7 @@ class Ui_Truckscreen(QMainWindow):
 
         self.ref_11.setText(data[self.line]['ref'])
         self.ref_11.setGeometry(
-            QtCore.QRect(ref_x, ref_list_x + (font_size * self.line) + separator, self.getWidth(self.ref_11), font_size))
+            QtCore.QRect(ref_x, ref_list_x + (font_size * self.line) + separator, self.getWidth(self.ref_11)+8, font_size))
 
         self.state_11 = DataLabel(self.centralwidget, self.line, "state")
         self.state_11.setFont(QtGui.QFont(font, line_font_size))
@@ -471,7 +471,7 @@ class Ui_Truckscreen(QMainWindow):
         self.dock_11.setText(data[self.line]['dock'])
         self.dock_11.setGeometry(
             QtCore.QRect(screen_width - self.getWidth(self.dock_11) - margin, ref_list_x + (font_size * self.line) + separator,
-                         self.getWidth(self.dock_11), font_size))
+                         self.getWidth(self.dock_11)+ margin, font_size))
 
         # endregion
 
@@ -486,7 +486,7 @@ class Ui_Truckscreen(QMainWindow):
 
         self.ref_12.setText(data[self.line]['ref'])
         self.ref_12.setGeometry(
-            QtCore.QRect(ref_x, ref_list_x + (font_size * self.line) + separator, self.getWidth(self.ref_12), font_size))
+            QtCore.QRect(ref_x, ref_list_x + (font_size * self.line) + separator, self.getWidth(self.ref_12)+8, font_size))
 
         self.state_12 = DataLabel(self.centralwidget, self.line, "state")
         self.state_12.setFont(QtGui.QFont(font, line_font_size))
@@ -506,7 +506,7 @@ class Ui_Truckscreen(QMainWindow):
         self.dock_12.setText(data[self.line]['dock'])
         self.dock_12.setGeometry(
             QtCore.QRect(screen_width - self.getWidth(self.dock_12) - margin, ref_list_x + (font_size * self.line) + separator,
-                         self.getWidth(self.dock_12), font_size))
+                         self.getWidth(self.dock_12)+ margin, font_size))
 
         # endregion
 

@@ -10,7 +10,7 @@ class DataLabel(QLabel):
         self.timer = QTimer()
         self.index = index
         self.category = category
-        self.timer.start(500)
+        self.timer.start(100)
         self.data = ""
         self.previous_state = "LOADING"
         self.time = 0
@@ -30,7 +30,7 @@ class DataLabel(QLabel):
                 elif fetched_datas[self.index]['state'] is False and fetched_datas[self.index]['flag'] is True:
                     self.data = 'COME'
                 elif fetched_datas[self.index]['state'] is True and fetched_datas[self.index]['flag'] is True:
-                    self.setStyleSheet("color: blue")
+                    self.setStyleSheet("color: #059ED8")
                     self.show()
                     self.data = 'LOADING'
                 else:
@@ -45,7 +45,7 @@ class DataLabel(QLabel):
                 self.timer.timeout.connect(self.blink)
                 # self.setStyleSheet("color: #66FF22")
             elif self.category == 'state' and self.data == 'LOADING':
-                self.setStyleSheet("color: blue")
+                self.setStyleSheet("color: #059ED8")
                 self.show()
             elif self.category == 'state' and self.data == 'WAIT':
                 self.setStyleSheet("color: orange")

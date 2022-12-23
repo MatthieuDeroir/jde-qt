@@ -5,29 +5,47 @@ from utils.req import req
 
 
 class DisplayLabel(QLabel):
-    def __init__(self, widget, pos):
+    def __init__(self, widget, posi):
         super().__init__(widget)
         self.timer = QTimer()
-        self.pos = pos
-        self.timer.start(1000)
+        self.posi = posi 
+        
+       
+        if self.posi == 0 or  self.posi == 1 or self.posi == 2 or self.posi == 3:
+            self.timer.start(1000)
+            self.timer.timeout.connect(self.fetchData)
+            self.timer.timeout.connect(self.updateData)
+        else:
+            self.timer.start(100)
+            self.timer.timeout.connect(self.fetchData)
+            self.timer.timeout.connect(self.updateData)
         self.path = "./"
-        self.timer.timeout.connect(self.updateData)
-        self.timer.timeout.connect(self.fetchData)
+        
+        self.screen = False 
+        
 
     def fetchData(self):
+        print("DisplayLabel")
         try:
             fetched_datas = req("get", ip_fs).json()
-            self.path = fetched_datas[self.pos]['path']
+            self.path = fetched_datas[self.posi]['path']
+            print(self.path)
             ## TODO:
             # GET DATA
-            print(fetched_datas)
+
 
         except:
             print("cant fetch datas")
 
 
     def updateData(self):
-        self.setStyleSheet("background-image:url(" + path_to_media + self.path + ")")
+        if self.posi == 1000:
+            if self.screen == False:
+                self.setStyleSheet("background-image:url(./fullscreenBlack.png)")
+                self.screen = True 
+        else:    
+            self.setStyleSheet("background-image:url(" + path_to_media + self.path + ")")
+            self.screen = False
 
 
 

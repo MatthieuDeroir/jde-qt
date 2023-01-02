@@ -9,73 +9,63 @@ port = ":4000"
 ip = "http://"+ ipv4 + port + "/trucks"
 ip_fs = "http://"+ ipv4 + port + "/files"
 ip_mode = "http://"+ ipv4 + port + "/modes"
+ip_mode_put = "http://"+ ipv4 + port + "/mode/637a54bc1b9131702da13698"
 ip_sb = "http://"+ ipv4 + port + "/veille"
-
-path_to_media = "../../server/frontend/public"
+position = 5
+path_to_media = "../../server/frontend/build"
 
 blink_time = 1
 
 ref_x = 3
-ref_width = 105
-state_x = 92
+ref_width = 97
+state_x = 98
 dock_x = 180
-dock_title_x = 1
-margin = 3
+dock_title_x = 1.1
+margin = 8
 font_size = 25
 ref_list_x = 75
-state_max_size = 80
+state_max_size = 75
 separator = 46
 
-line_font_size = 12
+line_font_size = 12.5
 title_font_size = 10
-font = "Arial"
+font = "Liberation Mono"
 
-data = [{"ref": "0123456789",
-         "state": "LOADING",
-         "dock": "13"
+data = [{"ref": "          ",
+         "state": " ",
+         "dock": "  "
+         },{"ref": "          ",
+         "state": " ",
+         "dock": "  "
+         },{"ref": "          ",
+         "state": " ",
+         "dock": "  "
+         },{"ref": "          ",
+         "state": " ",
+         "dock": "  "
+         },{"ref": "          ",
+         "state": " ",
+         "dock": "  "
+         },{"ref": "          ",
+         "state": " ",
+         "dock": "  "
+         },{"ref": "          ",
+         "state": " ",
+         "dock": "  "
+         },{"ref": "          ",
+         "state": " ",
+         "dock": "  "
+         },{"ref": "          ",
+         "state": " ",
+         "dock": "  "
+         },{"ref": "          ",
+         "state": " ",
+         "dock": "  "
+         },{"ref": "          ",
+         "state": " ",
+         "dock": "  "
+         },{"ref": "          ",
+         "state": " ",
+         "dock": "  "
          },
-        {"ref": "0123456789",
-         "state": "COME",
-         "dock": "13"
-         },
-        {"ref": "0123456789",
-         "state": "LOADING",
-         "dock": "13"
-         },
-        {"ref": "0123456789",
-         "state": "COME",
-         "dock": "13"
-         },
-        {"ref": "0123456789",
-         "state": "LOADING",
-         "dock": "13"
-         },
-        {"ref": "0123456789",
-         "state": "COME",
-         "dock": "13"
-         },
-        {"ref": "0123456789",
-         "state": "WAIT",
-         "dock": "13"
-         },
-        {"ref": "0123456789",
-         "state": "WAIT",
-         "dock": "13"
-         },
-        {"ref": "0123456789",
-         "state": "WAIT",
-         "dock": "13"
-         },
-        {"ref": "0123456789",
-         "state": "WAIT",
-         "dock": "13"
-         },
-        {"ref": "0123456789",
-         "state": "WAIT",
-         "dock": "13"
-         },
-        {"ref": "0123456789",
-         "state": "WAIT",
-         "dock": "13"
-         }
         ]

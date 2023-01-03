@@ -9,7 +9,7 @@ from PyQt5.QtMultimediaWidgets import QVideoWidget
 
 
 
-class MediaLabel(QLabel):
+class MediaLabel(QLabel, QVideoWidget):
     def __init__(self, widget, pos):
         super().__init__(widget)
         self.timer = QTimer()
@@ -67,12 +67,10 @@ class MediaLabel(QLabel):
 
             else:
                 print("File is a video")
-                # Create a QMovie object and set the file name to the video file
-                movie = QtGui.QMovie(path_to_media + self.path)
-                # Set the movie to be displayed in the label
-                self.setMovie(movie)
-                # Start playing the movie
-                movie.start()
+                # Set the media player's media to the video file
+                media = QMediaContent(QtCore.QUrl.fromLocalFile(path_to_media + self.path))
+                self.media_player.setMedia(media)
+                self.media_player.play()
                 print("media played")
 
     # def updateData(self):

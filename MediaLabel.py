@@ -103,7 +103,7 @@ from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from PyQt5.QtMultimediaWidgets import QVideoWidget
 
 
-class MediaLabel(QLabel, QVideoWidget):
+class MediaLabel(QLabel, QVideoWidget, object):
     def __init__(self, widget, pos):
         super().__init__(widget)
         self.timer = QTimer()

@@ -9,7 +9,7 @@ from PyQt5.QtMultimediaWidgets import QVideoWidget
 
 
 
-class MediaLabel(QLabel, QVideoWidget):
+class MediaLabel(QLabel):
     def __init__(self, widget, pos):
         super().__init__(widget)
         self.timer = QTimer()
@@ -25,9 +25,13 @@ class MediaLabel(QLabel, QVideoWidget):
         self.current_path = "./"
         self.hasModifiedMediaSource = True
 
+        # Create a QLabel to show the pixmap
+        self.image_label = QLabel(self)
+        self.image_label.setScaledContents(True)
+
         # Create a QMediaPlayer object and set its video output to the label
         self.media_player = QMediaPlayer(None, QMediaPlayer.VideoSurface)
-        self.media_player.setVideoOutput(self)
+        self.media_player.setVideoOutput(self.image_label)
 
 
     def fetchData(self):
@@ -57,7 +61,7 @@ class MediaLabel(QLabel, QVideoWidget):
                 # Load the image and set it as the label's pixmap
                 pixmap = QtGui.QPixmap(path_to_media + self.path)
                 print("Pixmap created")
-                self.setPixmap(pixmap)
+                self.image_label.setPixmap(pixmap)
                 print("Pixmap setted")
                 # self.setStyleSheet("background-image:url(" + path_to_media + self.path + ")")
 

@@ -15,6 +15,7 @@ class DisplayLabel(QLabel):
         self.timer.timeout.connect(self.fetchData)
         self.timer.timeout.connect(self.updateData)
         self.setScaledContents(True)
+        self.setStyleSheet("width:192px;")
 
         self.path = "./"
 

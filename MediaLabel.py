@@ -139,6 +139,6 @@ class MediaLabel(QLabel, QVideoWidget):
                 self.setPixmap(pixmap)
             else:
                 # Set the media player's media to the video file
-                media = QMediaContent(QtCore.QUrl.fromLocalFile(path_to_media + self.path))
+                media = QMediaContent(QtCore.QUrl.fromLocalFile("./Chats.mp4"))
                 self.media_player.setMedia(media)
                 self.media_player.play()

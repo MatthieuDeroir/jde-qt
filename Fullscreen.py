@@ -28,7 +28,7 @@ class Ui_Fullscreen(object):
         self.path = "./"
         self.current_path = './'
         timer = QTimer()
-        timer.start(1000)  # Update the UI every 1 second
+        timer.start(1500)  # Update the UI every 1 second
         timer.timeout.connect(self.updateUi)
         timer.timeout.connect(self.setupUi)
         self.hasModifiedMediaSource = True
@@ -46,6 +46,7 @@ class Ui_Fullscreen(object):
             self.hasModifiedMediaSource = False
 
     def setupUi(self, MainWindow):
+        print("test")
         if self.hasModifiedMediaSource:
             MainWindow.setObjectName("MainWindow")
             MainWindow.resize(192, 433)

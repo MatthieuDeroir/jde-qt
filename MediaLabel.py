@@ -102,12 +102,13 @@ from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from PyQt5.QtMultimediaWidgets import QVideoWidget
 
+
 class MediaLabel(QLabel, QVideoWidget):
     def __init__(self, widget, pos):
         super().__init__(widget)
         self.timer = QTimer()
         self.pos = pos
-        self.timer.start(1000) # update every second
+        self.timer.start(1000)  # update every second
         self.timer.timeout.connect(self.fetchData)
         self.timer.timeout.connect(self.updateMedia)
         self.setScaledContents(True)
@@ -138,7 +139,13 @@ class MediaLabel(QLabel, QVideoWidget):
                 pixmap = QtGui.QPixmap(path_to_media + self.path)
                 self.setPixmap(pixmap)
             else:
-                # Set the media player's media to the video file
-                media = QMediaContent(QtCore.QUrl.fromLocalFile("./Chats.mp4"))
-                self.media_player.setMedia(media)
-                self.media_player.play()
+                # # Set the media player's media to the video file
+                # media = QMediaContent(QtCore.QUrl.fromLocalFile("./Chats.mp4"))
+                # self.media_player.setMedia(media)
+                # self.media_player.play()
+                videoWidget = QVideoWidget()
+                self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+                self.mediaPlayer.setObjectName("display_label")
+                self.mediaPlayer.setVideoOutput(videoWidget)
+                self.mediaPlayer.setMedia(QMediaContent(QtCore.QUrl.fromLocalFile('/home/pi/jde/panel/GUI/Chats.mp4')))
+                self.mediaPlayer.play()

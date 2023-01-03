@@ -113,6 +113,7 @@ class Main(QtWidgets.QMainWindow):
             elif self.mode == 0 and self.hasChangedDisplayMode == True:
                 self.ui = Ui_Shutdown(-1)
 
+
                 
             if self.hasChangedDisplayMode and self.mode != 3:
                 self.timer.start(1000)

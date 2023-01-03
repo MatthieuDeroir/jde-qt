@@ -43,22 +43,30 @@ class MediaLabel(QLabel, QVideoWidget):
             if self.path != self.current_path:
                 self.current_path = self.path
                 self.hasModifiedMediaSource = True
+                print("Media source Modified !")
             else:
                 self.hasModifiedMediaSource = False
 
     def updateMedia(self):
         if self.hasModifiedMediaSource:
+
             #"""Set the media file to be displayed in the label."""
             _, file_extension = os.path.splitext(path_to_media + self.path)
-            if file_extension in ('.jpg', '.png', '.gif'):
+            if file_extension in ('.jpg', '.png', '.gif', '.jpeg'):
+                print("File is an image")
                 # Load the image and set it as the label's pixmap
                 pixmap = QtGui.QPixmap(self.path)
+                print("Pixmap created")
                 self.setPixmap(pixmap)
+                print("Pixmap setted")
+
             else:
+                print("File is a video")
                 # Set the media player's media to the video file
                 media = QMediaContent(QtCore.QUrl.fromLocalFile(path_to_media + self.path))
                 self.media_player.setMedia(media)
                 self.media_player.play()
+                print("media played")
 
     # def updateData(self):
     #     if self.pos == -1:

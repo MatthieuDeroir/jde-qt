@@ -68,6 +68,10 @@ class Main(QtWidgets.QMainWindow):
         self.index = index
         self.start = ["", ""]
         self.stop = ["", ""]
+
+        self.current_medias = []
+        self.medias = []
+
         self.veille = True
         self.lastMedia = True
         # build ui
@@ -83,21 +87,12 @@ class Main(QtWidgets.QMainWindow):
 
     def getOption(self):
         #TODO : Implicitement, la selection d'un mode signifie également la séléction d'un format de média (video ou image)
-            if self.current_mode is not self.mode:
+            if self.current_mode is not self.mode or self.current_medias is not self.medias:
                 self.hasChangedDisplayMode = True
                 self.current_mode = self.mode
 
-            elif self.mode == 2 and self.hasChangedDisplayMode == True:
-                self.ui = Ui_Fullscreen(0)
-                
-            elif self.mode == 1 and self.hasChangedDisplayMode == True:
-                self.ui = Ui_Splitscreen()
-                
-            elif self.mode == 0 and self.hasChangedDisplayMode == True:
-                self.ui = Ui_Shutdown(-1)
-
             if self.mode == 3:
-                self.timer.start(self.medias[self.index]['duration'] * 1000)
+                #self.timer.start(self.medias[self.index]['duration'] * 1000)
                 if self.index > 4:
                     if len(self.medias) != 5:
                         self.ui = Ui_Fullscreen(self.index)
@@ -110,6 +105,17 @@ class Main(QtWidgets.QMainWindow):
                     self.ui.setupUi(self)
                     self.lastMedia = False
                 self.index = self.index + 1
+
+            elif self.mode == 2 and self.hasChangedDisplayMode == True:
+                self.ui = Ui_Fullscreen(0)
+                
+            elif self.mode == 1 and self.hasChangedDisplayMode == True:
+                self.ui = Ui_Splitscreen()
+                
+            elif self.mode == 0 and self.hasChangedDisplayMode == True:
+                self.ui = Ui_Shutdown(-1)
+
+
                 
             if self.hasChangedDisplayMode and self.mode != 3:
                 self.timer.start(1000)

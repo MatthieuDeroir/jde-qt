@@ -71,7 +71,9 @@ class Main(QtWidgets.QMainWindow):
         self.veille = True
         self.lastMedia = True
         # build ui
+
         self.getOption()
+        # self.ui.setupUi(self)
         self.timer = QTimer(self)
         self.timer.start(1000)
         #self.timer.start(media . duration)
@@ -96,7 +98,7 @@ class Main(QtWidgets.QMainWindow):
             elif self.mode == 0 and self.hasChangedDisplayMode == True:
                 self.ui = Ui_Shutdown(-1)
 
-            if self.mode == 3:
+            elif self.mode == 3:
                 self.timer.start(self.medias[self.index]['duration'] * 1000)
                 if self.index > 4:
                     if len(self.medias) != 5:

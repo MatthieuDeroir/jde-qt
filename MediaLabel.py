@@ -95,7 +95,7 @@ from data import *
 # #
 
 import os
-from PyQt5.QtWidgets import QLabel, QWidget
+from PyQt5.QtWidgets import QLabel, QWidget, QVBoxLayout
 from PyQt5.QtCore import QTimer
 from PyQt5 import QtCore
 from PyQt5 import QtGui, QtWidgets
@@ -131,7 +131,7 @@ class MediaLabel(QLabel, QVideoWidget):
             else:
                 self.hasModifiedMediaSource = False
 
-    def updateMedia(self):
+    def updateMedia(self, MainWindow):
         if self.hasModifiedMediaSource:
             _, file_extension = os.path.splitext(path_to_media + self.path)
             if file_extension in ('.jpg', '.png', '.gif', '.jpeg'):
@@ -143,6 +143,16 @@ class MediaLabel(QLabel, QVideoWidget):
                 # media = QMediaContent(QtCore.QUrl.fromLocalFile("./Chats.mp4"))
                 # self.media_player.setMedia(media)
                 # self.media_player.play()
+
+                MainWindow.setObjectName("MainWindow")
+                MainWindow.resize(192, 433)
+                videoWidget = QVideoWidget()
+                wid = QtWidgets.QWidget(MainWindow)
+                MainWindow.setCentralWidget(wid)
+                self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+                layout = QVBoxLayout()
+                layout.addWidget(videoWidget)
+                wid.setLayout(layout)
                 videoWidget = QVideoWidget()
                 self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
                 self.mediaPlayer.setObjectName("display_label")

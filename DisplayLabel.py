@@ -21,7 +21,7 @@ class DisplayLabel(QLabel):
     def fetchData(self):
         print("DisplayLabel")
         if self.pos == -1:
-            self.path = "medias/fullscreenBlack.png"
+            self.path = "./medias/fullscreenBlack.png"
         else:
             try:
                 fetched_datas = req("get", ip_fs).json()

@@ -18,10 +18,15 @@ from DataLabel import DataLabel
 
 class Ui_Truckscreen(QMainWindow):
     def fetchData(self):
-        self.pathFullScreen = req("get", ip_fs).json()
+        try:
+            self.pathFullScreen = req("get", ip_fs).json()
+        except:
+            print("can't get fs path ")
     def setupUi(self, MainWindow):
-        self.media = req("get", ip_fs).json()
-        
+        try:
+            self.media = req("get", ip_fs).json()
+        except:
+            print("can't get medias")
         self.timer = QTimer()
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)

@@ -96,12 +96,14 @@ class Main(QtWidgets.QMainWindow):
                 # self.timer.start(self.medias[self.index]['duration'] * 1000)
                 if self.index > 4:
                     if len(self.medias) != 5:
+                        self.timer.start(self.medias[self.index]['duration'] * 1000)
                         self.ui = Ui_Fullscreen(self.index)
                         self.ui.setupUi(self)
                         self.lastMedia = True
                     if self.index >= len(self.medias) - 1:
                         self.index = 3
                 elif self.index == 4 and self.lastMedia == True:
+                    self.timer.start(self.medias[self.index]['duration'] * 1000)
                     self.ui = Ui_Truckscreen()
                     self.ui.setupUi(self)
                     self.lastMedia = False

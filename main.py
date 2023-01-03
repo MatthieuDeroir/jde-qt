@@ -82,7 +82,7 @@ class Main(QtWidgets.QMainWindow):
 
     def getOption(self):
         
-        
+        try:
             if self.current_mode is not self.mode:
                 self.hasChangedDisplayMode = True
                 self.current_mode = self.mode
@@ -108,7 +108,7 @@ class Main(QtWidgets.QMainWindow):
             elif self.mode == 1 and self.hasChangedDisplayMode == True:
                 self.ui = Ui_Splitscreen()
                 
-            elif self.mode == 0 and self.hasChangedDisplayMode == True:
+            elif self.mode == 0 or self.mode == 4 and self.hasChangedDisplayMode == True:
                 self.ui = Ui_Fullscreen(1000)
                 
             if self.hasChangedDisplayMode and self.mode != 3:
@@ -117,6 +117,9 @@ class Main(QtWidgets.QMainWindow):
                 self.noMedia = True
         
             return self.index
+        except:
+              print("cant fetch datas")
+
 
     def updateMode(self):
         try:
@@ -133,109 +136,110 @@ class Main(QtWidgets.QMainWindow):
             print("cant fetch datas")
 
     def screenBlanking(self):
-        now = datetime.now()
-        self.current_hour = now.strftime("%H")
-        self.current_minute = now.strftime("%M")
-        self.current_days = now.strftime("%A")
-        #print("Il est ", self.current_hour, ":", self.current_minute,  self.current_days)
-        try:
-            #print("La veille est prévue entre ", self.start[0], ":", self.start[1], " et ", self.stop[0], ":", self.stop[1])
-            if self.current_days == "Sunday":
-                if self.dstart[0] < self.current_hour:
-                    self.veille = False
-                    self.display("on")
-                elif self.dstart[0] == self.current_hour and self.dstart[1] <= self.current_minute:
-                    self.veille = False
-                    self.display("on")
+        if self.mode !=4:
+            now = datetime.now()
+            self.current_hour = now.strftime("%H")
+            self.current_minute = now.strftime("%M")
+            self.current_days = now.strftime("%A")
+            #print("Il est ", self.current_hour, ":", self.current_minute,  self.current_days)
+            try:
+                #print("La veille est prévue entre ", self.start[0], ":", self.start[1], " et ", self.stop[0], ":", self.stop[1])
+                if self.current_days == "Sunday":
+                    if self.dstart[0] < self.current_hour:
+                        self.veille = False
+                        self.display("on")
+                    elif self.dstart[0] == self.current_hour and self.dstart[1] <= self.current_minute:
+                        self.veille = False
+                        self.display("on")
+                    else:
+                        self.display("off")
+                elif self.current_days == "Saturday":
+                    if self.sstart[0] <= self.sstop[0]:
+                        if self.sstart[0] < self.current_hour:
+                            if self.sstop[0] > self.current_hour:
+                                self.display("on")
+
+                            elif self.sstop[0] == self.current_hour and self.sstop[1] > self.current_minute:
+                                self.display("on")
+
+                            else:
+                                self.display("off")
+
+                        elif self.sstart[0] == self.current_hour and self.sstart[1] <= self.current_minute:
+                            if self.sstop[0] > self.current_hour:
+                                self.display("on")
+
+                            elif self.sstop[0] == self.current_hour and self.sstop[1] > self.current_minute:
+                                self.display("on")
+                            else:
+                                self.display("off")
+
+                    elif self.sstart[0] > self.sstop[0]:
+                        if self.sstart[0] < self.current_hour:
+                            if self.sstop[0] > self.current_hour:
+                                self.display("off")
+
+                            elif self.sstop[0] == self.current_hour and self.sstop[1] > self.current_minute:
+                                self.display("off")
+
+                            else:
+                                self.display("on")
+
+                        elif self.sstart[0] == self.current_hour and self.sstart[1] <= self.current_minute:
+                            if self.sstop[0] > self.current_hour:
+                                self.display("off")
+
+                            elif self.sstop[0] == self.current_hour and self.sstop[1] > self.current_minute:
+                                self.display("off")
+                            else:
+                                self.display("on")
                 else:
-                    self.display("off")
-            elif self.current_days == "Saturday":
-                if self.sstart[0] <= self.sstop[0]:
-                    if self.sstart[0] < self.current_hour:
-                        if self.sstop[0] > self.current_hour:
-                            self.display("on")
+                    if self.start[0] <= self.stop[0]:
+                        if self.start[0] < self.current_hour:
+                            if self.stop[0] > self.current_hour:
+                                self.display("on")   
+                            elif self.stop[0] == self.current_hour and self.stop[1] > self.current_minute:
+                                self.display("on")
 
-                        elif self.sstop[0] == self.current_hour and self.sstop[1] > self.current_minute:
-                            self.display("on")
+                            else:
+                                self.display("off")
+                                
 
-                        else:
-                            self.display("off")
+                        elif self.start[0] == self.current_hour and self.start[1] <= self.current_minute:
+                            if self.stop[0] > self.current_hour:
+                                self.display("on")
 
-                    elif self.sstart[0] == self.current_hour and self.sstart[1] <= self.current_minute:
-                        if self.sstop[0] > self.current_hour:
-                            self.display("on")
+                            elif self.stop[0] == self.current_hour and self.stop[1] > self.current_minute:
+                                self.display("on")
+                            else:
+                                self.display("off")
+                                
 
-                        elif self.sstop[0] == self.current_hour and self.sstop[1] > self.current_minute:
-                            self.display("on")
-                        else:
-                            self.display("off")
+                    elif self.start[0] > self.stop[0]:
+                        if self.start[0] < self.current_hour:
+                            if self.stop[0] > self.current_hour:
+                                self.display("off")
 
-                elif self.sstart[0] > self.sstop[0]:
-                    if self.sstart[0] < self.current_hour:
-                        if self.sstop[0] > self.current_hour:
-                            self.display("off")
+                            elif self.stop[0] == self.current_hour and self.stop[1] > self.current_minute:
+                                self.display("off")
+                                
 
-                        elif self.sstop[0] == self.current_hour and self.sstop[1] > self.current_minute:
-                            self.display("off")
-
-                        else:
-                            self.display("on")
-
-                    elif self.sstart[0] == self.current_hour and self.sstart[1] <= self.current_minute:
-                        if self.sstop[0] > self.current_hour:
-                            self.display("off")
-
-                        elif self.sstop[0] == self.current_hour and self.sstop[1] > self.current_minute:
-                            self.display("off")
-                        else:
-                            self.display("on")
-            else:
-                if self.start[0] <= self.stop[0]:
-                    if self.start[0] < self.current_hour:
-                        if self.stop[0] > self.current_hour:
-                            self.display("on")   
-                        elif self.stop[0] == self.current_hour and self.stop[1] > self.current_minute:
-                            self.display("on")
-
-                        else:
-                            self.display("off")
+                            else:
+                                self.display("off")
                             
-
-                    elif self.start[0] == self.current_hour and self.start[1] <= self.current_minute:
-                        if self.stop[0] > self.current_hour:
-                            self.display("on")
-
-                        elif self.stop[0] == self.current_hour and self.stop[1] > self.current_minute:
-                            self.display("on")
-                        else:
-                            self.display("off")
+                        elif self.start[0] == self.current_hour and self.start[1] <= self.current_minute:
+                            if self.stop[0] > self.current_hour:
+                                self.display("off")
                             
+                            elif self.stop[0] == self.current_hour and self.stop[1] > self.current_minute:
+                                self.display("off")
+                                
+                            else:
+                                self.display("off")
+                                
 
-                elif self.start[0] > self.stop[0]:
-                    if self.start[0] < self.current_hour:
-                        if self.stop[0] > self.current_hour:
-                            self.display("off")
-
-                        elif self.stop[0] == self.current_hour and self.stop[1] > self.current_minute:
-                            self.display("off")
-                            
-
-                        else:
-                            self.display("off")
-                           
-                    elif self.start[0] == self.current_hour and self.start[1] <= self.current_minute:
-                        if self.stop[0] > self.current_hour:
-                            self.display("off")
-                           
-                        elif self.stop[0] == self.current_hour and self.stop[1] > self.current_minute:
-                            self.display("off")
-                            
-                        else:
-                            self.display("off")
-                            
-
-        except:
-            print('start and stop not init')
+            except:
+                print('start and stop not init')
 
     def display(self, state):
         # print("PROCESS", state)
@@ -243,7 +247,7 @@ class Main(QtWidgets.QMainWindow):
         #              state], stdout=subprocess.PIPE)
         
 
-        if state == "on" and self.veille == False:
+        if state == "on" and self.veille == False :
           
             requests.put( ip_mode_put, data={'activeMode': self.modeBack})
             self.veille = True

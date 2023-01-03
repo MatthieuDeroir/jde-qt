@@ -104,6 +104,7 @@ class Main(QtWidgets.QMainWindow):
 
             elif self.mode == 2 and self.hasChangedDisplayMode == True:
                 self.ui = Ui_Fullscreen(0)
+                print("mode 2")
                 
             elif self.mode == 1 and self.hasChangedDisplayMode == True:
                 self.ui = Ui_Splitscreen()

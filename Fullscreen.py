@@ -40,11 +40,9 @@ class Ui_Fullscreen(object):
             print("cant fetch datas")
 
     def setupUi(self, MainWindow):
-
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(192, 433)
-        print(self.path)
-
+        print("setupUi")
         if self.path[-3:] == 'mp4':
             print(self.path)
             videoWidget = QVideoWidget()

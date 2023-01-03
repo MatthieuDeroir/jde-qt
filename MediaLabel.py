@@ -59,6 +59,7 @@ class MediaLabel(QLabel, QVideoWidget):
                 print("Pixmap created")
                 self.setPixmap(pixmap)
                 print("Pixmap setted")
+                self.setStyleSheet("background-image:url(" + path_to_media + self.path + ")")
 
             else:
                 print("File is a video")

@@ -67,10 +67,12 @@ class MediaLabel(QLabel):
 
             else:
                 print("File is a video")
-                # Set the media player's media to the video file
-                media = QMediaContent(QtCore.QUrl.fromLocalFile(path_to_media + self.path))
-                self.media_player.setMedia(media)
-                self.media_player.play()
+                # Create a QMovie object and set the file name to the video file
+                movie = QtGui.QMovie(path_to_media + self.path)
+                # Set the movie to be displayed in the label
+                self.setMovie(movie)
+                # Start playing the movie
+                movie.start()
                 print("media played")
 
     # def updateData(self):

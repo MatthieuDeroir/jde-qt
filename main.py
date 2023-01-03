@@ -5,6 +5,7 @@ import sys
 from Trucks import Ui_Truckscreen
 from Fullscreen import Ui_Fullscreen
 from Splitscreen import Ui_Splitscreen
+from Shutdown import Ui_Shutdown
 # from PyQt5.QtCore import QTimer,QDateTime
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QWidget, QPushButton, QApplication, QListWidget, QGridLayout, QLabel
@@ -68,7 +69,7 @@ class Main(QtWidgets.QMainWindow):
         self.start = ["", ""]
         self.stop = ["", ""]
         self.veille = True
-        self.noMedia = True
+        self.lastMedia = True
         # build ui
         self.getOption()
         self.timer = QTimer(self)
@@ -81,27 +82,11 @@ class Main(QtWidgets.QMainWindow):
         self.timer.timeout.connect(self.screenBlanking)
 
     def getOption(self):
-        
-        
+        #TODO : Implicitement, la selection d'un mode signifie également la séléction d'un format de média (video ou image)
             if self.current_mode is not self.mode:
                 self.hasChangedDisplayMode = True
                 self.current_mode = self.mode
-            if self.mode == 3:
-                if self.index > 4:
-                    if len(self.medias) != 5:
-                        self.timer.start(self.medias[self.index]['duration']  * 1000 )         
-                        self.ui = Ui_Fullscreen(self.index)  
-                        self.ui.setupUi(self)
-                        self.noMedia = True
-                    if self.index >= len(self.medias)- 1:
-                        self.index = 3
-                elif self.index == 4 and self.noMedia == True:
-                    self.timer.start(self.medias[self.index]['duration']  * 1000 ) 
-                    self.ui = Ui_Truckscreen()
-                    self.ui.setupUi(self)
-                    self.noMedia = False
-                
-                self.index =  self.index +1  
+
             elif self.mode == 2 and self.hasChangedDisplayMode == True:
                 self.ui = Ui_Fullscreen(0)
                 
@@ -109,12 +94,28 @@ class Main(QtWidgets.QMainWindow):
                 self.ui = Ui_Splitscreen()
                 
             elif self.mode == 0 and self.hasChangedDisplayMode == True:
-                self.ui = Ui_Fullscreen(1000)
+                self.ui = Ui_Shutdown(-1)
+
+            if self.mode == 3:
+                self.timer.start(self.medias[self.index]['duration'] * 1000)
+                if self.index > 4:
+                    if len(self.medias) != 5:
+                        self.ui = Ui_Fullscreen(self.index)
+                        self.ui.setupUi(self)
+                        self.lastMedia = True
+                    if self.index >= len(self.medias) - 1:
+                        self.index = 3
+                elif self.index == 4 and self.lastMedia == True:
+                    self.ui = Ui_Truckscreen()
+                    self.ui.setupUi(self)
+                    self.lastMedia = False
+                self.index = self.index + 1
                 
             if self.hasChangedDisplayMode and self.mode != 3:
+                self.timer.start(1000)
                 self.ui.setupUi(self)
                 self.hasChangedDisplayMode = False
-                self.noMedia = True
+                self.lastMedia = True
         
             return self.index
 
@@ -232,7 +233,6 @@ class Main(QtWidgets.QMainWindow):
                             
                         else:
                             self.display("off")
-                            
 
         except:
             print('start and stop not init')

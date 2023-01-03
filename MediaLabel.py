@@ -29,9 +29,13 @@ class MediaLabel(QLabel, QVideoWidget):
         self.image_label = QLabel(self)
         self.image_label.setScaledContents(True)
 
+        # Set the media to the video file
+        media = QMediaContent(QtCore.QUrl.fromLocalFile('path/to/video.mp4'))
+
+
         # Create a QMediaPlayer object and set its video output to the label
         self.media_player = QMediaPlayer(None, QMediaPlayer.VideoSurface)
-        self.media_player.setVideoOutput(self.image_label)
+        self.media_player.setVideoOutput(media)
 
 
     def fetchData(self):

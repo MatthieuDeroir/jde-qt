@@ -49,6 +49,8 @@ class Ui_Fullscreen(object):
         if self.hasModifiedMediaSource:
             MainWindow.setObjectName("MainWindow")
             MainWindow.resize(192, 433)
+            print(self.path)
+
             if self.path[-3:] == 'mp4':
                 print(self.path)
                 videoWidget = QVideoWidget()

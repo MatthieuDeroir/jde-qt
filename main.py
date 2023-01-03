@@ -69,6 +69,7 @@ class Main(QtWidgets.QMainWindow):
         self.hasChangedDisplayMode = True
         self.index = index
         self.current_medias = []
+        self.medias = []
         self.start = ["", ""]
         self.stop = ["", ""]
         self.veille = True

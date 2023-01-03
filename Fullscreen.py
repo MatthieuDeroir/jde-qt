@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from DisplayLabel import DisplayLabel
+from MediaLabel import MediaLabel
 from utils.req import req
 from data import *
 
@@ -69,7 +70,7 @@ class Ui_Fullscreen(object):
             self.label.setObjectName("label")
             MainWindow.setCentralWidget(self.centralwidget)
 
-            self.display_label = DisplayLabel(self.centralwidget, self.index)
+            self.display_label = MediaLabel(self.centralwidget, self.index)
             self.display_label.setObjectName("display_label")
             # self.display_label.setStyleSheet("background-image: url(./fullscreen.png)")
             # self.display_label.setStyleSheet("background-image:url(./fullscreenBlack.png)")

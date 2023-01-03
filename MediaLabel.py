@@ -25,6 +25,9 @@ class MediaLabel(QLabel, QVideoWidget):
         self.current_path = "./"
         self.hasModifiedMediaSource = True
 
+        # Create a QVideoWidget to display the video
+        video_widget = QVideoWidget()
+
         # Create a QLabel to show the pixmap
         self.image_label = QLabel(self)
         self.image_label.setScaledContents(True)
@@ -33,9 +36,11 @@ class MediaLabel(QLabel, QVideoWidget):
         media = QMediaContent(QtCore.QUrl.fromLocalFile('path/to/video.mp4'))
 
 
+
         # Create a QMediaPlayer object and set its video output to the label
         self.media_player = QMediaPlayer(None, QMediaPlayer.VideoSurface)
-        self.media_player.setVideoOutput(media)
+        self.media_player.setMedia(media)
+        self.media_player.setVideoOutput(video_widget)
 
 
     def fetchData(self):

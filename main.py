@@ -133,7 +133,13 @@ class Main(QtWidgets.QMainWindow):
         try:
             self.mode = int(req("get", ip_mode).json()[0]['activeMode'])
             self.modeBack = int(req("get", ip_mode).json()[0]['modeBack'])
+        except:
+            print("cant fetch modes")
+        try:
             self.medias = req("get", ip_fs).json()
+        except:
+            print("cant fetch medias")
+        try:
             self.start = req("get", ip_sb).json()[0]['start'].split(":")
             self.stop = req("get", ip_sb).json()[0]['stop'].split(":")
             self.sstart = req("get", ip_sb).json()[1]['start'].split(":")
@@ -141,7 +147,7 @@ class Main(QtWidgets.QMainWindow):
             self.dstart = req("get", ip_sb).json()[2]['start'].split(":")
             self.dstop = req("get", ip_sb).json()[2]['stop'].split(":")
         except:
-            print("cant fetch datas")
+            print("cant fetch shutdown hours")
 
     def screenBlanking(self):
         now = datetime.now()

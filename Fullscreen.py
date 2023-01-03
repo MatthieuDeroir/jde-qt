@@ -42,7 +42,6 @@ class Ui_Fullscreen(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(192, 433)
-        print("setupUi")
         if self.path[-3:] == 'mp4':
             print(self.path)
             videoWidget = QVideoWidget()
@@ -68,6 +67,8 @@ class Ui_Fullscreen(object):
             self.display_label.setObjectName("display_label")
             self.display_label.setStyleSheet("background-image: url(medias/fullscreen.png)")
             self.display_label.setStyleSheet("background-image:url(medias/fullscreenBlack.png)")
+            print("Display dark background")
+
             self.display_label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
             self.display_label.setScaledContents(True)
 

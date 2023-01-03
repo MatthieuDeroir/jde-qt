@@ -11,7 +11,7 @@ class DisplayLabel(QLabel):
         self.pos = pos
 
         self.timer.start(1000)
-
+        print("display label")
         self.timer.timeout.connect(self.fetchData)
         self.timer.timeout.connect(self.updateData)
         self.setScaledContents(True)
@@ -25,6 +25,7 @@ class DisplayLabel(QLabel):
             try:
                 fetched_datas = req("get", ip_fs).json()
                 self.path = fetched_datas[self.pos]['path']
+                print("path = " + self.path)
             except:
                 print("cant fetch datas")
 
@@ -33,6 +34,7 @@ class DisplayLabel(QLabel):
             self.setStyleSheet("background-image:url(" + self.path + ")")
         else:
             self.setStyleSheet("background-image:url(" + path_to_media + self.path + ")")
+            print("image display")
 
     def blink(self):
         if self.isHidden():

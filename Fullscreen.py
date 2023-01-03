@@ -75,6 +75,7 @@ class Ui_Fullscreen(object):
             # self.display_label.setStyleSheet("background-image: url(./fullscreen.png)")
             # self.display_label.setStyleSheet("background-image:url(./fullscreenBlack.png)")
             self.display_label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
+            self.display_label.show()
 
             self.retranslateUi(MainWindow)
             QtCore.QMetaObject.connectSlotsByName(MainWindow)

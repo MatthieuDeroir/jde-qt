@@ -90,6 +90,7 @@ class Main(QtWidgets.QMainWindow):
             if self.current_mode is not self.mode or self.current_medias is not self.medias:
                 self.hasChangedDisplayMode = True
                 self.current_mode = self.mode
+                self.current_medias = self.medias
 
             if self.mode == 3:
                 #self.timer.start(self.medias[self.index]['duration'] * 1000)

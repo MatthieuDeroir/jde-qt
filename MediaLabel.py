@@ -55,7 +55,7 @@ class MediaLabel(QLabel, QVideoWidget):
             if file_extension in ('.jpg', '.png', '.gif', '.jpeg'):
                 print("File is an image")
                 # Load the image and set it as the label's pixmap
-                pixmap = QtGui.QPixmap(self.path)
+                pixmap = QtGui.QPixmap(path_to_media + self.path)
                 print("Pixmap created")
                 self.setPixmap(pixmap)
                 print("Pixmap setted")

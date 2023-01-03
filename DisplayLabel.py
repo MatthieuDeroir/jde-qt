@@ -19,7 +19,6 @@ class DisplayLabel(QLabel):
         self.path = "./"
 
     def fetchData(self):
-        print("DisplayLabel")
         if self.pos == -1:
             self.path = "./medias/fullscreenBlack.png"
         else:

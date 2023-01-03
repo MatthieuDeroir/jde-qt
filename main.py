@@ -68,6 +68,7 @@ class Main(QtWidgets.QMainWindow):
         self.current_mode = 3
         self.hasChangedDisplayMode = True
         self.index = index
+        self.current_medias = []
         self.start = ["", ""]
         self.stop = ["", ""]
         self.veille = True
@@ -87,9 +88,10 @@ class Main(QtWidgets.QMainWindow):
 
     def getOption(self):
         # TODO : Implicitement, la selection d'un mode signifie également la séléction d'un format de média (video ou image)
-        if self.current_mode is not self.mode:
+        if self.current_mode is not self.mode or self.current_medias is not self.medias:
             self.hasChangedDisplayMode = True
             self.current_mode = self.mode
+            self.current_medias = self.medias
 
         if self.mode == 3:
             if self.index > 4:

@@ -10,7 +10,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from DisplayLabel import DisplayLabel
-from MediaLabel import MediaLabel
 from utils.req import req
 from data import *
 
@@ -47,35 +46,35 @@ class Ui_Fullscreen(object):
             self.hasModifiedMediaSource = False
 
     def setupUi(self, MainWindow):
+
         if self.hasModifiedMediaSource:
             MainWindow.setObjectName("MainWindow")
             MainWindow.resize(192, 433)
-            # if self.path[-3:] == 'mp4':
-            #     videoWidget = QVideoWidget()
-            #     wid = QtWidgets.QWidget(MainWindow)
-            #     MainWindow.setCentralWidget(wid)
-            #     self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
-            #     layout = QVBoxLayout()
-            #     layout.addWidget(videoWidget)
-            #     wid.setLayout(layout)
-            #     self.mediaPlayer.setObjectName("display_label")
-            #     self.mediaPlayer.setVideoOutput(videoWidget)
-            #     self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile('/home/pi/jde/panel/GUI/Chats.mp4')))
-            #     self.mediaPlayer.play()
-            # else:
-            self.centralwidget = QtWidgets.QWidget(MainWindow)
-            self.centralwidget.setObjectName("centralwidget")
-            self.label = QtWidgets.QLabel(self.centralwidget)
-            self.label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
-            self.label.setObjectName("label")
-            MainWindow.setCentralWidget(self.centralwidget)
+            if self.path[-3:] == 'mp4':
+                videoWidget = QVideoWidget()
+                wid = QtWidgets.QWidget(MainWindow)
+                MainWindow.setCentralWidget(wid)
+                self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+                layout = QVBoxLayout()
+                layout.addWidget(videoWidget)
+                wid.setLayout(layout)
+                self.mediaPlayer.setObjectName("display_label")
+                self.mediaPlayer.setVideoOutput(videoWidget)
+                self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile('/home/pi/jde/panel/GUI/Chats.mp4')))
+                self.mediaPlayer.play()
+            else:
+                self.centralwidget = QtWidgets.QWidget(MainWindow)
+                self.centralwidget.setObjectName("centralwidget")
+                self.label = QtWidgets.QLabel(self.centralwidget)
+                self.label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
+                self.label.setObjectName("label")
+                MainWindow.setCentralWidget(self.centralwidget)
 
-            self.display_label = MediaLabel(self.centralwidget, self.index)
-            self.display_label.setObjectName("display_label")
-            # self.display_label.setStyleSheet("background-image: url(./fullscreen.png)")
-            # self.display_label.setStyleSheet("background-image:url(./fullscreenBlack.png)")
-            self.display_label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
-            self.display_label.show()
+                self.display_label = DisplayLabel(self.centralwidget, self.index)
+                self.display_label.setObjectName("display_label")
+                self.display_label.setStyleSheet("background-image: url(./fullscreen.png)")
+                self.display_label.setStyleSheet("background-image:url(./fullscreenBlack.png)")
+                self.display_label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
 
             self.retranslateUi(MainWindow)
             QtCore.QMetaObject.connectSlotsByName(MainWindow)

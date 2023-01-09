@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/pyQt5.iml" filepath="$PROJECT_DIR$/.idea/pyQt5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../Perso/qt_video/.idea/qt_video.iml" filepath="$PROJECT_DIR$/../../../../Perso/qt_video/.idea/qt_video.iml" />
     </modules>
   </component>
 </project>

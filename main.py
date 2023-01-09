@@ -135,8 +135,8 @@ class Main(QtWidgets.QMainWindow):
                                        self.week_start[0] == self.current_hour and
                                        self.week_stop[1] > self.current_minute) else self.display("off")
 
-            except:
-                print('start and stop not init')
+        except:
+            print('start and stop not init')
 
     def display(self, state):
         # print("PROCESS", state)

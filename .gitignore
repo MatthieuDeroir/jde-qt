@@ -1,2 +1,4 @@
 *.mp4
 medias/
+__pycache__/
+utils/__pycache__/

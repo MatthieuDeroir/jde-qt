@@ -42,45 +42,43 @@ class Main(QtWidgets.QMainWindow):
         self.timer.timeout.connect(self.screenBlanking)
 
     def getOption(self):
-        # TODO : Implicitement, la selection d'un mode signifie également la séléction d'un format de média (video ou image)
-        if self.current_mode is not self.mode or self.current_medias is not self.medias:
-            self.hasChangedDisplayMode = True
-            self.current_mode = self.mode
-            self.current_medias = self.medias
-
-        if self.mode == 3 and self.hasChangedDisplayMode == True:
-            # self.timer.start(self.medias[self.index]['duration'] * 1000)
-            if self.index > 4:
-                if len(self.medias) != 5:
-                    self.timer.start(self.medias[self.index]['duration'] * 1000)
-                    self.ui = Ui_Fullscreen(self.index)
+        try:
+            if self.current_mode is not self.mode:
+                self.hasChangedDisplayMode = True
+                self.current_mode = self.mode
+            if self.mode == 3:
+                if self.index > 4:
+                    if len(self.medias) != 5:
+                        self.timer.start(self.medias[self.index]['duration']  * 1000 )         
+                        self.ui = Ui_Fullscreen(self.index)  
+                        self.ui.setupUi(self)
+                        self.noMedia = True
+                    if self.index >= len(self.medias)- 1:
+                        self.index = 3
+                elif self.index == 4 and self.noMedia == True:
+                    self.timer.start(self.medias[self.index]['duration']  * 1000 ) 
+                    self.ui = Ui_Truckscreen()
                     self.ui.setupUi(self)
-                    self.lastMedia = True
-                if self.index >= len(self.medias) - 1:
-                    self.index = 3
-            elif self.index == 4 and self.lastMedia == True:
-                self.timer.start(self.medias[self.index]['duration'] * 1000)
-                self.ui = Ui_Truckscreen()
+                    self.noMedia = False
+                
+                self.index =  self.index +1  
+            elif self.mode == 2 and self.hasChangedDisplayMode == True:
+                self.ui = Ui_Fullscreen(0)
+                
+            elif self.mode == 1 and self.hasChangedDisplayMode == True:
+                self.ui = Ui_Splitscreen()
+                
+            elif self.mode == 0 or self.mode == 4 and self.hasChangedDisplayMode == True:
+                self.ui = Ui_Fullscreen(1000)
+                
+            if self.hasChangedDisplayMode and self.mode != 3:
                 self.ui.setupUi(self)
-                self.lastMedia = False
-            self.index = self.index + 1
-
-        elif self.mode == 2 and self.hasChangedDisplayMode == True:
-            self.ui = Ui_Fullscreen(0)
-
-        elif self.mode == 1 and self.hasChangedDisplayMode == True:
-            self.ui = Ui_Splitscreen()
-
-        elif self.mode == 0 and self.hasChangedDisplayMode == True:
-            self.ui = Ui_Shutdown(-1)
-
-        if self.hasChangedDisplayMode and self.mode != 3:
-            self.timer.start(1000)
-            self.ui.setupUi(self)
-            self.hasChangedDisplayMode = False
-            self.lastMedia = True
-
-        return self.index
+                self.hasChangedDisplayMode = False
+                self.noMedia = True
+        
+            return self.index
+        except:
+              print("cant fetch datas")
 
     def updateMode(self):
         try:
@@ -137,8 +135,8 @@ class Main(QtWidgets.QMainWindow):
                                        self.week_start[0] == self.current_hour and
                                        self.week_stop[1] > self.current_minute) else self.display("off")
 
-        except:
-            print('start and stop not init')
+            except:
+                print('start and stop not init')
 
     def display(self, state):
         # print("PROCESS", state)

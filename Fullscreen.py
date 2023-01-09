@@ -30,26 +30,23 @@ class Ui_Fullscreen(object):
         self.current_path = './'
         timer = QTimer()
         timer.start(1000)  # Update the UI every 1 second
-        # timer.timeout.connect(self.updateUi)
+        timer.timeout.connect(self.updateUi)
         timer.timeout.connect(self.setupUi)
         self.fetched_datas = ""
-        self.fetched_datas = req("get", ip_fs).json()
 
-    # def updateUi(self):
-    #     try:
-    #
-    #     except:
-    #         print("cant fetch datas")
+    def updateUi(self):
+        try:
+            self.fetched_datas = req("get", ip_fs).json()
+            self.format = self.fetched_datas[self.index]['format']
+        except:
+            print("cant fetch datas")
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(192, 433)
         try:
-            self.fetched_datas = req("get", ip_fs).json()
-            self.format = self.fetched_datas[self.index]['path']
-            print(self.fetched_datas)
-
             if self.fetched_datas[self.index]['format'] == 'mp4':
+                print(self.path)
                 videoWidget = QVideoWidget()
                 wid = QtWidgets.QWidget(MainWindow)
                 MainWindow.setCentralWidget(wid)

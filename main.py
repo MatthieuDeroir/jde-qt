@@ -43,7 +43,9 @@ class Main(QtWidgets.QMainWindow):
 
     def getOption(self):
         try:
-            if self.current_mode is not self.mode:
+            print(self.modeChange)
+            if self.current_mode is not self.mode or self.modeChange == True:
+                print('test')
                 self.hasChangedDisplayMode = True
                 self.current_mode = self.mode
             if self.mode == 3:
@@ -72,9 +74,13 @@ class Main(QtWidgets.QMainWindow):
                 self.ui = Ui_Fullscreen(1000)
                 
             if self.hasChangedDisplayMode and self.mode != 3:
+                print('test02')
                 self.ui.setupUi(self)
                 self.hasChangedDisplayMode = False
                 self.noMedia = True
+                #requests.put(ip_mode_put, data={'modeChange': False})
+                self.modeChange = req("put", ip_mode_put, {'modeChange': False})
+
         
             return self.index
         except:
@@ -84,6 +90,7 @@ class Main(QtWidgets.QMainWindow):
         try:
             self.mode = int(req("get", ip_mode).json()[0]['activeMode'])
             self.modeBack = int(req("get", ip_mode).json()[0]['modeBack'])
+            self.modeChange = req("get", ip_mode).json()[0]['modeChange']
         except:
             print("cant fetch modes")
         try:
@@ -108,10 +115,10 @@ class Main(QtWidgets.QMainWindow):
         self.current_hour = now.strftime("%H")
         self.current_minute = now.strftime("%M")
         self.current_days = now.strftime("%A")
-        print("Il est ", self.current_hour, ":", self.current_minute, self.current_days)
+        #print("Il est ", self.current_hour, ":", self.current_minute, self.current_days)
         try:
-            print("La veille est prévue entre ", self.week_start[0], ":", self.week_start[1], " et ", self.week_stop[0],
-                  ":", self.week_stop[1])
+            #print("La veille est prévue entre ", self.week_start[0], ":", self.week_start[1], " et ", self.week_stop[0],
+             #     ":", self.week_stop[1])
 
             if (self.current_days == "Sunday"):
 

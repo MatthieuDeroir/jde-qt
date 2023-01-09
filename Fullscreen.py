@@ -47,7 +47,6 @@ class Ui_Fullscreen(object):
         try:
             self.fetched_datas = req("get", ip_fs).json()
             self.format = self.fetched_datas[self.index]['path']
-            print(self.fetched_datas)
 
             if self.fetched_datas[self.index]['format'] == 'mp4':
                 videoWidget = QVideoWidget()

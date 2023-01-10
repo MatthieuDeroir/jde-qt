@@ -13,6 +13,7 @@ ip_mode_put = "http://"+ ipv4 + port + "/mode/6368fc0a41898f80900da97b"
 ip_sb = "http://"+ ipv4 + port + "/veille"
 position = 5
 path_to_media = "../../server/frontend/build"
+path_to_video = "/home/pi/jde/server/frontend/build"
 
 blink_time = 1
 

@@ -46,8 +46,8 @@ class Ui_Fullscreen(object):
         MainWindow.resize(192, 433)
         try:
             self.fetched_datas = req("get", ip_fs).json()
-            self.format = self.fetched_datas[self.index]['path']
-
+            self.path = self.fetched_datas[self.index]['path']
+           
             if self.fetched_datas[self.index]['format'] == 'mp4':
                 videoWidget = QVideoWidget()
                 wid = QtWidgets.QWidget(MainWindow)
@@ -58,7 +58,7 @@ class Ui_Fullscreen(object):
                 wid.setLayout(layout)
                 self.mediaPlayer.setObjectName("display_label")
                 self.mediaPlayer.setVideoOutput(videoWidget)
-                self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile('/home/pi/jde/panel/GUI/Chats.mp4')))
+                self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(path_to_video + self.path )))
                 self.mediaPlayer.play()
             else:
                 self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -80,7 +80,7 @@ class Ui_Fullscreen(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
+       
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))

@@ -11,7 +11,6 @@ class DisplayLabel(QLabel):
         self.pos = pos
 
         self.timer.start(1000)
-        print("display label")
         self.timer.timeout.connect(self.fetchData)
         self.timer.timeout.connect(self.updateData)
         self.setScaledContents(True)
@@ -34,6 +33,7 @@ class DisplayLabel(QLabel):
         if self.pos == -1:
             self.setStyleSheet("background-image:url(" + self.path + ")")
         else:
+            print(path_to_media + self.path)
             self.setStyleSheet("background-image:url(" + path_to_media + self.path + ")")
             print("image display")
 

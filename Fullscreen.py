@@ -59,7 +59,7 @@ class Ui_Fullscreen(object):
                 wid.setLayout(layout)
                 self.mediaPlayer.setObjectName("display_label")
                 self.mediaPlayer.setVideoOutput(videoWidget)
-                self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile('/home/pi/jde/panel/GUI/Chats.mp4')))
+                self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(path_to_video+self.fetched_datas[i]['path'])))
                 self.mediaPlayer.play()
             else:
                 self.centralwidget = QtWidgets.QWidget(MainWindow)

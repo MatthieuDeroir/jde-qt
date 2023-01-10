@@ -31,7 +31,7 @@ class Ui_Splitscreen(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
         self.label.setObjectName("label")
-        MainWindow.setCentralWidget(self.centralwidget)
+        MainWindow.setCentralWidget(layout)
 
         try:
             self.fetched_datas = req("get", ip_fs).json()
@@ -44,7 +44,6 @@ class Ui_Splitscreen(object):
 
             videoWidget_1 = QVideoWidget()
             wid = QtWidgets.QWidget(MainWindow)
-            # MainWindow.setCentralWidget(wid)
             self.mediaPlayer_1 = QMediaPlayer(None, QMediaPlayer.VideoSurface)
             layout = QVBoxLayout()
             layout.addWidget(videoWidget_1)
@@ -88,7 +87,7 @@ class Ui_Splitscreen(object):
         if self.fetched_datas[3]['format'] == 'mp4':
             videoWidget_3 = QVideoWidget()
             wid = QtWidgets.QWidget(MainWindow)
-            # MainWindow.setCentralWidget(wid)
+            MainWindow.setCentralWidget(wid)
             self.mediaPlayer_3 = QMediaPlayer(None, QMediaPlayer.VideoSurface)
             layout = QVBoxLayout()
             layout.addWidget(videoWidget_3)

@@ -11,7 +11,6 @@ class DisplayLabel(QLabel):
         self.pos = pos
 
         self.timer.start(1000)
-        print("display label")
         self.timer.timeout.connect(self.fetchData)
         self.timer.timeout.connect(self.updateData)
         self.setScaledContents(True)

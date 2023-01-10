@@ -51,7 +51,7 @@ class DataLabel(QLabel):
                 self.setStyleSheet("color: orange")
 
         except:
-            print("cant fetch datas")
+            print("cant fetch datas // DATALABEL")
 
 # self.data[self.index][self.category] = fetched_datas[self.index]
 

@@ -46,7 +46,8 @@ class Ui_Fullscreen(object):
         MainWindow.resize(192, 433)
         try:
             self.fetched_datas = req("get", ip_fs).json()
-            self.format = self.fetched_datas[self.index]['path']
+            self.format = self.fetched_datas[self.index]['format']
+            self.path = self.fetched_datas[self.index]['path']
 
             if self.fetched_datas[self.index]['format'] == 'mp4':
                 videoWidget = QVideoWidget()
@@ -75,6 +76,7 @@ class Ui_Fullscreen(object):
 
                 self.display_label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
                 self.display_label.setScaledContents(True)
+                self.display_label.setPixmap(QtGui.QPixmap(self.path))
         except:
             print("cant fetch datas")
 

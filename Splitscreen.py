@@ -25,34 +25,36 @@ class Ui_Splitscreen(object):
         MainWindow.resize(192, 433)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
+        layout = QVBoxLayout()
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
         self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
 
-        def updateUi(self):
-            try:
-                self.fetched_datas = req("get", ip_fs).json()
-            except:
-                print("cant fetch datas")
+        try:
+            self.fetched_datas = req("get", ip_fs).json()
+        except:
+            print("cant fetch datas")
 
         self.line = 0
 
         if self.fetched_datas[1]['format'] == 'mp4':
 
-            videoWidget = QVideoWidget()
+            videoWidget_1 = QVideoWidget()
             wid = QtWidgets.QWidget(MainWindow)
-            MainWindow.setCentralWidget(wid)
-            self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+            # MainWindow.setCentralWidget(wid)
+            self.mediaPlayer_1 = QMediaPlayer(None, QMediaPlayer.VideoSurface)
             layout = QVBoxLayout()
-            layout.addWidget(videoWidget)
+            layout.addWidget(videoWidget_1)
             wid.setLayout(layout)
-            videoWidget.setGeometry(
+            videoWidget_1.setGeometry(
                 QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))
-            self.mediaPlayer.setObjectName("display_label")
-            self.mediaPlayer.setVideoOutput(videoWidget)
-            self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile('/home/pi/jde/panel/GUI/Chats.mp4')))
-            self.mediaPlayer.play()
+            self.mediaPlayer_1.setObjectName("display_label")
+            self.mediaPlayer_1.setVideoOutput(videoWidget_1)
+            self.mediaPlayer_1.setMedia(QMediaContent(QUrl.fromLocalFile('/home/pi/jde/panel/GUI/Chats.mp4')))
+            self.mediaPlayer_1.play()
         else:
             self.display_label_1 = DisplayLabel(self.centralwidget, 1)
             self.display_label_1.setObjectName("display_label_1")
@@ -62,19 +64,19 @@ class Ui_Splitscreen(object):
         self.line = 1
 
         if self.fetched_datas[2]['format'] == 'mp4':
-            videoWidget = QVideoWidget()
+            videoWidget_2 = QVideoWidget()
             wid = QtWidgets.QWidget(MainWindow)
             MainWindow.setCentralWidget(wid)
-            self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+            self.mediaPlayer_2 = QMediaPlayer(None, QMediaPlayer.VideoSurface)
             layout = QVBoxLayout()
-            layout.addWidget(videoWidget)
+            layout.addWidget(videoWidget_2)
             wid.setLayout(layout)
-            videoWidget.setGeometry(
+            videoWidget_2.setGeometry(
                 QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))
-            self.mediaPlayer.setObjectName("display_label")
-            self.mediaPlayer.setVideoOutput(videoWidget)
-            self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile('/home/pi/jde/panel/GUI/Chats.mp4')))
-            self.mediaPlayer.play()
+            self.mediaPlayer_2.setObjectName("display_label")
+            self.mediaPlayer_2.setVideoOutput(videoWidget_2)
+            self.mediaPlayer_2.setMedia(QMediaContent(QUrl.fromLocalFile('/home/pi/jde/panel/GUI/Chats.mp4')))
+            self.mediaPlayer_2.play()
         else:
             self.display_label_2 = DisplayLabel(self.centralwidget, 2)
             self.display_label_2.setObjectName("display_label_2")
@@ -84,25 +86,28 @@ class Ui_Splitscreen(object):
             self.line = 2
 
         if self.fetched_datas[3]['format'] == 'mp4':
-            videoWidget = QVideoWidget()
+            videoWidget_3 = QVideoWidget()
             wid = QtWidgets.QWidget(MainWindow)
-            MainWindow.setCentralWidget(wid)
-            self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+            # MainWindow.setCentralWidget(wid)
+            self.mediaPlayer_3 = QMediaPlayer(None, QMediaPlayer.VideoSurface)
             layout = QVBoxLayout()
-            layout.addWidget(videoWidget)
+            layout.addWidget(videoWidget_3)
             wid.setLayout(layout)
-            videoWidget.setGeometry(
+            videoWidget_3.setGeometry(
                 QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))
-            self.mediaPlayer.setObjectName("display_label")
-            self.mediaPlayer.setVideoOutput(videoWidget)
-            self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile('/home/pi/jde/panel/GUI/Chats.mp4')))
-            self.mediaPlayer.play()
+            self.mediaPlayer_3.setObjectName("display_label")
+            self.mediaPlayer_3.setVideoOutput(videoWidget_3)
+            self.mediaPlayer_3.setMedia(QMediaContent(QUrl.fromLocalFile('/home/pi/jde/panel/GUI/Chats.mp4')))
+            self.mediaPlayer_3.play()
         else:
             self.display_label_3 = DisplayLabel(self.centralwidget, 3)
             self.display_label_3.setObjectName("display_label_3")
             self.display_label_3.setGeometry(
                 QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))
 
+        layout.addWidget(videoWidget_1) if videoWidget_1 else layout.addWidget(self.display_label_1)
+        layout.addWidget(videoWidget_2) if videoWidget_2 else layout.addWidget(self.display_label_2)
+        layout.addWidget(videoWidget_3) if videoWidget_3 else layout.addWidget(self.display_label_3)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
